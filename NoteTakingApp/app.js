@@ -1,13 +1,13 @@
 let notes = [] //make empty array for notes
-let editingNoteId = null // unsure
+let editingNoteId = null // keeps track of what note is being edited. null when adding a note or set to the note's ID when editing
 
 function loadNotes() {
-  const savedNotes = localStorage.getItem('quickNotes') // get an item? not sure yet
+  const savedNotes = localStorage.getItem('quickNotes') // get an item
   return savedNotes ? JSON.parse(savedNotes) : [] // whatever is got is put into a new empty array
 }
 
 function saveNote(event) {
-  event.preventDefault() // unsure
+  event.preventDefault() //prevents the page from loading
 
   const title = document.getElementById('noteTitle').value.trim(); // get the value of the inputs and get rid of whitespace
   const content = document.getElementById('noteContent').value.trim(); // same
@@ -15,9 +15,9 @@ function saveNote(event) {
   if(editingNoteId) {
     // Update existing Note
 
-    const noteIndex = notes.findIndex(note => note.id === editingNoteId) // unsure
+    const noteIndex = notes.findIndex(note => note.id === editingNoteId) // finds the index of the note with the matching id in the notes array
     notes[noteIndex] = { // create a note at the index of noteIndex
-      ...notes[noteIndex], //unsure
+      ...notes[noteIndex], //... is the spread operator, which means to copy the properties of this note first, then change the ones specified later
       title: title, // setting the title and the content
       content: content
     }

@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+:root{
+    --notes-area-width: 80%;
+}
+
 body{
     display: flex;
     flex-direction: row;
@@ -16,8 +20,8 @@ header{
     
 }
 
-section{
-    border-color: green;
+footer{
+    border-color: purple;
     border-style: solid;
 }
 
@@ -36,24 +40,56 @@ section{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 
 .hamburger-menu{
-    width: 15%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
+    height: 80%;
+    border-radius: 100%;
+}
+
+.hamburger-menu-image{
+    aspect-ratio: 1 / 1;
+    height: 90%;
 }
 
 .search-bar{
     width: 70%;
     height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+.search-bar-input{
+    height: 80%;
+    width: 90%;
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
 }
 
 .dark-mode-toggle{
     width: 15%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dark-mode-button{
+    height: 60%;
+    aspect-ratio: 1 / 1;
 }
 
 .notes-area{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     width: 80vw;
     height: 100vh;
     border-style: solid;
@@ -61,7 +97,8 @@ section{
 }
 
 .notes-header{
-    height: 15%;
+    height: 20%;
+    width: var(--notes-area-width);
 }
 
 .my-day{
@@ -75,5 +112,18 @@ section{
 .main{
     display: flex;
     flex-direction: row;
-    height: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40%;
+
+    border-color: green;
+    border-style: solid;
+    width: var(--notes-area-width);
+}
+
+
+.notes-input{
+    width: var(--notes-area-width);
+    height: 15%;
+    
 }
