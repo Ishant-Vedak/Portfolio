@@ -1,0 +1,70 @@
+/* Element Styles*/
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+}
+
+header{
+    border-color: blue;
+    border-style: solid;
+    
+}
+
+section{
+    border-color: green;
+    border-style: solid;
+}
+
+/* Class Styles*/
+
+.main{
+    display: flex;
+    flex-direction: row;
+}
+.navigation-bar{
+    width: 30vw;
+    height: 100vh;
+    border-style: solid;
+    border-color: red;
+}
+
+.nav-bar-header{
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.hamburger-menu{
+    width: 15%;
+    height: 100%;
+}
+
+.search-bar{
+    width: 70%;
+    height: 100%;
+}
+
+.dark-mode-toggle{
+    width: 15%;
+    height: 100%;
+}
+
+
+
+.notes-area{
+    width: 70vw;
+    height: 100vh;
+    border-style: solid;
+    border-color: red;
+}
+
+.notes-header{
+    height: 30%;
+}
