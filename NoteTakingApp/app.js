@@ -1,60 +1,60 @@
-let notes = []
-let editingNoteId = null
+let notes = [] //make empty array for notes
+let editingNoteId = null // unsure
 
 function loadNotes() {
-  const savedNotes = localStorage.getItem('quickNotes')
-  return savedNotes ? JSON.parse(savedNotes) : []
+  const savedNotes = localStorage.getItem('quickNotes') // get an item? not sure yet
+  return savedNotes ? JSON.parse(savedNotes) : [] // whatever is got is put into a new empty array
 }
 
 function saveNote(event) {
-  event.preventDefault()
+  event.preventDefault() // unsure
 
-  const title = document.getElementById('noteTitle').value.trim();
-  const content = document.getElementById('noteContent').value.trim();
+  const title = document.getElementById('noteTitle').value.trim(); // get the value of the inputs and get rid of whitespace
+  const content = document.getElementById('noteContent').value.trim(); // same
 
   if(editingNoteId) {
     // Update existing Note
 
-    const noteIndex = notes.findIndex(note => note.id === editingNoteId)
-    notes[noteIndex] = {
-      ...notes[noteIndex],
-      title: title,
+    const noteIndex = notes.findIndex(note => note.id === editingNoteId) // unsure
+    notes[noteIndex] = { // create a note at the index of noteIndex
+      ...notes[noteIndex], //unsure
+      title: title, // setting the title and the content
       content: content
     }
 
   } else {
     // Add New Note
-    notes.unshift({
-      id: generateId(),
-      title: title,
+    notes.unshift({ //unsure
+      id: generateId(), //return the date of the string i think?
+      title: title, //make title and content 
       content: content
     })
   }
 
-  closeNoteDialog()
-  saveNotes()
-  renderNotes()
+  closeNoteDialog() // close the modal
+  saveNotes() //save everything
+  renderNotes()//render changes
 }
 
 function generateId() {
-  return Date.now().toString()
+  return Date.now().toString() // not sure why date is being used
 }
 
 function saveNotes() {
-  localStorage.setItem('quickNotes', JSON.stringify(notes))
+  localStorage.setItem('quickNotes', JSON.stringify(notes)) //saves stuff to local storage
 }
 
 function deleteNote(noteId) {
-  notes = notes.filter(note => note.id != noteId)
-  saveNotes()
+  notes = notes.filter(note => note.id != noteId) //unsure
+  saveNotes() //save and render changes
   renderNotes()
 }
 
 function renderNotes() {
-  const notesContainer = document.getElementById('notesContainer');
+  const notesContainer = document.getElementById('notesContainer'); //notesContainer is the grid where all the notes are rendered
 
-  if(notes.length === 0) {
-    // show some fall back elements
+  if(notes.length === 0) { 
+    // if no notes are there
     notesContainer.innerHTML = `
       <div class="empty-state">
         <h2>No notes yet</h2>
@@ -65,6 +65,7 @@ function renderNotes() {
     return
   }
 
+  //this is the styling of the note when viewing the notesContainer grid?
   notesContainer.innerHTML = notes.map(note => `
     <div class="note-card">
       <h3 class="note-title">${note.title}</h3>
@@ -83,15 +84,15 @@ function renderNotes() {
       </div>
 
     </div>
-    `).join('')
+    `).join('') //unsure
 }
 
 function openNoteDialog(noteId = null) {
-  const dialog = document.getElementById('noteDialog');
+  const dialog = document.getElementById('noteDialog'); //get all these elements
   const titleInput = document.getElementById('noteTitle');
   const contentInput = document.getElementById('noteContent');
 
-  if(noteId) {
+  if(noteId) { //unsure of how this code works, knows it edits the notes
     // Edit Mode
     const noteToEdit = notes.find(note => note.id === noteId)
     editingNoteId = noteId
@@ -107,37 +108,37 @@ function openNoteDialog(noteId = null) {
     contentInput.value = ''
   }
 
-  dialog.showModal()
-  titleInput.focus()
+  dialog.showModal() //show the modal
+  titleInput.focus()//unsure
 
 }
 
 function closeNoteDialog() {
-  document.getElementById('noteDialog').close()
+  document.getElementById('noteDialog').close() //close the modal
 }
 
-function toggleTheme() {
-  const isDark = document.body.classList.toggle('dark-theme')
-  localStorage.setItem('theme', isDark ? 'dark' : 'light')
+function toggleTheme() { //change between light and dark
+  const isDark = document.body.classList.toggle('dark-theme') //unsure what toggle is 
+  localStorage.setItem('theme', isDark ? 'dark' : 'light') //ternary operator type of thing?
   document.getElementById('themeToggleBtn').textContent = isDark ? '☀️' : '🌙'
 }
 
 function applyStoredTheme() {
   if(localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-theme')
-    document.getElementById('themeToggleBtn').textContent = '☀️'
+    document.body.classList.add('dark-theme') //changes the theme but unsure of the syntax
+    document.getElementById('themeToggleBtn').textContent = '☀️' //changes the symbol
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() { //unsure how the function is able to be here
   applyStoredTheme()
   notes = loadNotes()
-  renderNotes()
+  renderNotes() //saves the theme and applies, loads the notes array, and then render
 
-  document.getElementById('noteForm').addEventListener('submit', saveNote)
+  document.getElementById('noteForm').addEventListener('submit', saveNote) //unsure what either does
   document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme)
 
-  document.getElementById('noteDialog').addEventListener('click', function(event) {
+  document.getElementById('noteDialog').addEventListener('click', function(event) { //i think if outside the modal then exits
     if(event.target === this) {
       closeNoteDialog()
     }

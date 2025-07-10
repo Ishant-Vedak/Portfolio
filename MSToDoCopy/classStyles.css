@@ -1,20 +1,17 @@
-*, *::after, *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .main{
     display: flex;
     flex-direction: row;
 }
-
 .navigation-bar{
     width: 30vw;
     height: 100vh;
+    border-style: solid;
+    border-color: red;
 }
 
 .notes-area{
     width: 70vw;
     height: 100vh;
+    border-style: solid;
+    border-color: red;
 }
