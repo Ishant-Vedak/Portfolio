@@ -1,23 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
 /* Element Styles*/
 *, *::after, *::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
 }
 
 :root{
-    --notes-area-width: 80%;
+    --notes-area-width: 95%;
+    --nav-bar-bg: white;
 }
 
 body{
     display: flex;
     flex-direction: row;
-}
-
-header{
-    border-color: blue;
-    border-style: solid;
-    
 }
 
 footer{
@@ -31,8 +29,9 @@ footer{
 .navigation-bar{
     width: 20vw;
     height: 100vh;
-    border-style: solid;
-    border-color: red;
+    background-color: var(--nav-bar-bg);
+    border-right-style: solid;
+    border-color: black;
 }
 
 .nav-bar-header{
@@ -47,6 +46,9 @@ footer{
     aspect-ratio: 1 / 1;
     height: 80%;
     border-radius: 100%;
+
+    border-color: transparent;
+    background-color: var(--nav-bar-bg);
 }
 
 .hamburger-menu-image{
@@ -69,6 +71,8 @@ footer{
     border-style: solid;
     border-color: black;
     border-radius: 10px;
+
+    
 }
 
 .dark-mode-toggle{
@@ -77,6 +81,9 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-color: transparent;
+    background-color: var(--nav-bar-bg);
 }
 
 .dark-mode-button{
@@ -92,29 +99,37 @@ footer{
 
     width: 80vw;
     height: 100vh;
-    border-style: solid;
-    border-color: red;
+    
 }
 
 .notes-header{
-    height: 20%;
+    height: 15%;
     width: var(--notes-area-width);
+
+    border-color: blue;
+    border-style: solid;
 }
 
 .my-day{
-    height: 80%;
+    height:fit-content;
+    
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
 }
 
 .day-and-date{
     height: 20%;
+
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
 }
 
 .main{
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-    margin-bottom: 10px;
-    height: 40%;
+    margin-bottom: 20px;
+    height: 50%;
 
     border-color: green;
     border-style: solid;

@@ -24,7 +24,7 @@ function saveNote(event) {
 
   } else {
     // Add New Note
-    notes.unshift({ //unsure
+    notes.unshift({ // adds notes to the start of the array, so new notes appear at the top
       id: generateId(), //return the date of the string i think?
       title: title, //make title and content 
       content: content
@@ -45,7 +45,7 @@ function saveNotes() {
 }
 
 function deleteNote(noteId) {
-  notes = notes.filter(note => note.id != noteId) //unsure
+  notes = notes.filter(note => note.id != noteId) //matches the note with the same noteId
   saveNotes() //save and render changes
   renderNotes()
 }
@@ -84,7 +84,7 @@ function renderNotes() {
       </div>
 
     </div>
-    `).join('') //unsure
+    `).join('') //the .map function makes multiple strings for each of the html elements above in an array, and the .join function joins them into one string
 }
 
 function openNoteDialog(noteId = null) {
@@ -92,8 +92,8 @@ function openNoteDialog(noteId = null) {
   const titleInput = document.getElementById('noteTitle');
   const contentInput = document.getElementById('noteContent');
 
-  if(noteId) { //unsure of how this code works, knows it edits the notes
-    // Edit Mode
+  if(noteId) { 
+    // Edit Mode: finds the id of the note being edited, remembers the note id, fills the title and content 
     const noteToEdit = notes.find(note => note.id === noteId)
     editingNoteId = noteId
     document.getElementById('dialogTitle').textContent = 'Edit Note'
@@ -101,7 +101,7 @@ function openNoteDialog(noteId = null) {
     contentInput.value = noteToEdit.content
   }
   else {
-    // Add Mode
+    // Add Mode: no id is found, which means it adds a note
     editingNoteId = null
     document.getElementById('dialogTitle').textContent = 'Add New Note'
     titleInput.value = ''
@@ -109,7 +109,7 @@ function openNoteDialog(noteId = null) {
   }
 
   dialog.showModal() //show the modal
-  titleInput.focus()//unsure
+  titleInput.focus()//moves the cursor in the title input field so the user can start typing immediately
 
 }
 
@@ -118,7 +118,7 @@ function closeNoteDialog() {
 }
 
 function toggleTheme() { //change between light and dark
-  const isDark = document.body.classList.toggle('dark-theme') //unsure what toggle is 
+  const isDark = document.body.classList.toggle('dark-theme') //toggle will add the class if its not there, and remove it if it is there 
   localStorage.setItem('theme', isDark ? 'dark' : 'light') //ternary operator type of thing?
   document.getElementById('themeToggleBtn').textContent = isDark ? '☀️' : '🌙'
 }
