@@ -23,12 +23,9 @@ section{
 
 /* Class Styles*/
 
-.main{
-    display: flex;
-    flex-direction: row;
-}
+
 .navigation-bar{
-    width: 30vw;
+    width: 20vw;
     height: 100vh;
     border-style: solid;
     border-color: red;
@@ -56,15 +53,27 @@ section{
     height: 100%;
 }
 
-
-
 .notes-area{
-    width: 70vw;
+    width: 80vw;
     height: 100vh;
     border-style: solid;
     border-color: red;
 }
 
 .notes-header{
-    height: 30%;
+    height: 15%;
+}
+
+.my-day{
+    height: 80%;
+}
+
+.day-and-date{
+    height: 20%;
+}
+
+.main{
+    display: flex;
+    flex-direction: row;
+    height: 70%;
 }
