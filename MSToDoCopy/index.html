@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>MS To Do Copy</title>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="navigation-bar">
@@ -25,12 +26,18 @@
     </div>
     <div class="notes-area">
         <header class="notes-header">
-            <h1 class="my-day">
+            <div class="day-stuff">
+                <h1 class="my-day">
                 My Day
-            </h1>
-            <h4 class="day-and-date">
-                The day and date
-            </h4>
+                </h1>
+                <h4 class="day-and-date">
+                    The day and date
+                </h4>
+            </div>
+            <div class="filler"></div>
+            <div class="three-dots-menu">
+                <img src="icons/three_dots_hori.svg" class="three-dots">
+            </div>
         </header>
         <main class="main">
 
@@ -39,6 +46,6 @@
             Add A Note
         </footer>
     </div>
-    <script src="script.js"></script>
+    
 </body>
 </html>

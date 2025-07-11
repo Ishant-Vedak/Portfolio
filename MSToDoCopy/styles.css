@@ -32,6 +32,7 @@ footer{
     background-color: var(--nav-bar-bg);
     border-right-style: solid;
     border-color: black;
+
 }
 
 .nav-bar-header{
@@ -103,11 +104,14 @@ footer{
 }
 
 .notes-header{
-    height: 15%;
+    height: fit-content;
     width: var(--notes-area-width);
 
     border-color: blue;
     border-style: solid;
+
+    display: flex;
+    flex-direction: row;
 }
 
 .my-day{
@@ -122,6 +126,27 @@ footer{
 
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
+}
+
+.filler{
+    display: inline-block;
+    flex: 1;
+    height: 100%;
+}
+
+.three-dots-menu{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+
+    align-content: center;
+    justify-content: center;
+    
+}
+
+.three-dots{
+    
 }
 
 .main{
