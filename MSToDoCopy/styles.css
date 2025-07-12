@@ -10,7 +10,12 @@
 
 :root{
     --notes-area-width: 95%;
-    --nav-bar-bg: white;
+    --notes-area-bg-light: white;
+    --notes-area-hover-light: rgb(205, 205, 205);
+
+
+    --nav-bar-bg-light: rgb(206, 206, 206);
+    --nav-bar-hover-light: rgb(255, 255, 255);
 }
 
 body{
@@ -29,27 +34,38 @@ footer{
 .navigation-bar{
     width: 20vw;
     height: 100vh;
-    background-color: var(--nav-bar-bg);
+    background-color: var(--nav-bar-bg-light-light);
     border-right-style: solid;
     border-color: black;
+
+    background-color: var(--nav-bar-bg-light);
 
 }
 
 .nav-bar-header{
-    height: 10%;
+    height: 11%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    border-bottom-color: black;
+    border-bottom-style: solid;
 }
 
 .hamburger-menu{
     aspect-ratio: 1 / 1;
-    height: 80%;
-    border-radius: 100%;
+    height: 70%;
+    border-radius: 10%;
+
+    align-self: center;
 
     border-color: transparent;
-    background-color: var(--nav-bar-bg);
+    background-color: var(--nav-bar-bg-light);
+}
+
+.hamburger-menu:hover{
+    background-color: var(--nav-bar-hover-light);
 }
 
 .hamburger-menu-image{
@@ -63,7 +79,6 @@ footer{
     align-items: center;
     display: flex;
     justify-content: center;
-
 }
 
 .search-bar-input{
@@ -73,22 +88,35 @@ footer{
     border-color: black;
     border-radius: 10px;
 
-    
+    background-color: var(--nav-bar-bg-light);
+    color: black;
+
+    padding-left: 10px;
+}
+
+.search-bar-input::placeholder{
+    color: black;
 }
 
 .dark-mode-toggle{
-    width: 15%;
-    height: 100%;
+    height: 70%;
+    aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
     align-items: center;
 
+    border-radius: 100%;
+
     border-color: transparent;
-    background-color: var(--nav-bar-bg);
+    background-color: var(--nav-bar-bg-light);
+}
+
+.dark-mode-toggle:hover{
+    background-color: var(--nav-bar-hover-light);
 }
 
 .dark-mode-button{
-    height: 60%;
+    height: 70%;
     aspect-ratio: 1 / 1;
 }
 
@@ -100,6 +128,8 @@ footer{
 
     width: 80vw;
     height: 100vh;
+
+    background-color: var(--notes-area-bg-light);
     
 }
 
@@ -107,7 +137,7 @@ footer{
     height: fit-content;
     width: var(--notes-area-width);
 
-    border-color: blue;
+    border-color: transparent;
     border-style: solid;
 
     display: flex;
@@ -116,15 +146,13 @@ footer{
 
 .my-day{
     height:fit-content;
-    
-    font-family: "Montserrat", sans-serif;
     font-weight: 700;
+
+    margin-bottom: 5px;
 }
 
 .day-and-date{
     height: 20%;
-
-    font-family: "Montserrat", sans-serif;
     font-weight: 700;
 }
 
@@ -139,14 +167,21 @@ footer{
     aspect-ratio: 1 / 1;
 
     display: flex;
-
-    align-content: center;
     justify-content: center;
+    align-items: center;
+
+    border-color: transparent;
+    background-color: var(--notes-area-bg-light);
     
 }
 
+.three-dots-menu:hover{
+    background-color: var(--notes-area-hover-light);
+}
+
 .three-dots{
-    
+    height:50%;
+    aspect-ratio: 1 /1 ;
 }
 
 .main{
