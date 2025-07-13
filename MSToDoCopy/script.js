@@ -1,9 +1,3 @@
-//goofing around
-
-const main = document.getElementById('main')
-
-main.innerHTML = "working so far"
-
 //Notes Stuff
 //render notes
 
