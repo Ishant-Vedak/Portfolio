@@ -1,9 +1,54 @@
 //Notes Stuff
+
+let notes = []
 //render notes
+
+function renderNotes() {
+    const container = document.getElementById('main')
+
+    container.innerHTML = `
+    <div class="note-card">
+        <div class="note-header">
+            <h2 class="note-title">${note.title}</h2>
+            <button class="delete-note" data-id="${note.id}">Delete</button>
+        </div>
+    </div>
+    `
+}
 
 //load notes
 
+//save notes
+
+function saveNotes() {
+    localStorage.setItem('quicknotes', JSON.stringify(notes))
+}
+
 //add notes
+
+function addNotes() {
+    const input = document.getElementById('add-new-note')
+    input.addEventListener("keydown", function (event) {
+        if(event.key == "Enter") {
+            event.preventDefault()
+            const value = input.value.trim()
+            if (value) {
+                notes.unshift({
+                    id: generateId(),
+                    title: input
+                })
+            }
+        }       
+    })
+    saveNotes()
+    renderNotes()
+}
+
+//add time created for note 
+
+function timeCreated() {
+    return Date.now().toString()
+}
 
 //remove notes
 
@@ -24,3 +69,4 @@ document.getElementById('day-and-date').textContent = `${currentDay}, ${currentM
 setInterval(updateTime, 1000)
 
 updateTime()
+addNotes()
