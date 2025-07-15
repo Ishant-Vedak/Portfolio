@@ -70,25 +70,14 @@ document.getElementById('day-and-date').textContent = `${currentDay}, ${currentM
 //make function to change the circle in the checkbox
 
 function changeCircle() {
-    document.addEventListener("DOMContentLoaded", function () {
-        const container = document.getElementById('checkbox-container');
-        const checkbox = document.getElementById('checkbox');
-        const circle = document.getElementById('circle');
-
-        container.addEventListener('click', function (e) {
-            e.preventDefault(); // stop the label from toggling checkbox
-
-            checkbox.checked = !checkbox.checked;
-
-            circle.src = checkbox.checked
-            ? 'icons/circle_checked.svg'
-            : 'icons/circle_unchecked.svg';
-  });
-});
+    const container = document.getElementById('checkbox-container')
+    const circle = document.getElementById('circle')
+    container.addEventListener('click', () => {
+        circle.style.backgroundImage = 'url(icons/circle_checked.svg)'
+    })
 }
 
 setInterval(updateTime, 1000)
 updateTime()
 addNotes()
-changeCircle()
 
