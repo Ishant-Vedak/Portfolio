@@ -8,16 +8,17 @@ function renderNotes() {
 
     container.innerHTML = `
     <div class="note-card">
-        <div class="note-header">
+        <header class="note-header">
             <h2 class="note-title">${note.title}</h2>
             <button class="delete-note" data-id="${note.id}">Delete</button>
-        </div>
+        </header>
     </div>
     `
 }
 
 //load notes
 
+function loadNotes() {}
 //save notes
 
 function saveNotes() {
@@ -26,7 +27,7 @@ function saveNotes() {
 
 //add notes
 
-function addNotes() {
+function addNotes() {  
     const input = document.getElementById('add-new-note')
     input.addEventListener("keydown", function (event) {
         if(event.key == "Enter") {
@@ -66,7 +67,28 @@ const currentMonth = monthsArr[currentDateObj.getMonth()];
 document.getElementById('day-and-date').textContent = `${currentDay}, ${currentMonth} ${currentDate}`
 }
 
-setInterval(updateTime, 1000)
+//make function to change the circle in the checkbox
 
+function changeCircle() {
+    document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById('checkbox-container');
+        const checkbox = document.getElementById('checkbox');
+        const circle = document.getElementById('circle');
+
+        container.addEventListener('click', function (e) {
+            e.preventDefault(); // stop the label from toggling checkbox
+
+            checkbox.checked = !checkbox.checked;
+
+            circle.src = checkbox.checked
+            ? 'icons/circle_checked.svg'
+            : 'icons/circle_unchecked.svg';
+  });
+});
+}
+
+setInterval(updateTime, 1000)
 updateTime()
 addNotes()
+changeCircle()
+

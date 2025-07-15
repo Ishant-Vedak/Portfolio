@@ -1,0 +1,35 @@
+@import url(indexStyles.css);
+
+.note-card{
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    width: 100%;
+
+    border: 1px red solid;
+}
+
+.checkbox-container{
+    height: 100%;
+    aspect-ratio: 1/1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox{
+    display: none;
+}
+
+.circle{
+    background: url('icons/circle_unchecked.svg') center/cover ;
+    height: 50%;
+    aspect-ratio: 1/1;
+}
+
+
+.note-header{
+    flex: 1;
+}
+

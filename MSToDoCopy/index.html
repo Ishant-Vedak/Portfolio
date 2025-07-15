@@ -40,13 +40,24 @@
             </button>
         </header>
         <main class="main" id="main">
+            <div class="note-card">
+                <label class="checkbox-container" id="checkbox-container">
+                    <input type="checkbox" class="checkbox" id="checkbox">
+                    <img src="icons/circle_unchecked.svg" class="circle" id="circle">
+                </label>
+                <header class="note-header">
 
+                </header>
+                <button class="delete-note">
+                    <img src="icons/delete_button.svg" class="delete_button">
+                </button>
+            </div>
         </main> 
         <footer class="notes-input">
             <div class="plus-icon">
                 <img src="icons/plus_icon.svg" class="plus-symbol">
             </div>
-            <input type="text" class="add-new-note" id="add-new-note" placeholder="Add a New Note">
+            <input type="text" class="add-new-note" id="add-new-note" placeholder="Add a New Note" onclick="addNotes()">
         </footer>
     </div>
 </body>

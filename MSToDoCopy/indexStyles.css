@@ -7,7 +7,7 @@
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
 
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :root{
@@ -182,8 +182,8 @@ body{
 }
 
 .main{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 1fr);
     margin-top: 10px;
     margin-bottom: 20px;
     height: 50%;
@@ -192,7 +192,6 @@ body{
     border-style: solid;
     width: var(--notes-area-width);
 }
-
 
 .notes-input{
     width: var(--notes-area-width);
