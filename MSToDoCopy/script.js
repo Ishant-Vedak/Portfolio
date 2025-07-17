@@ -1,6 +1,8 @@
-//Notes Stuff
+//Settings Variables
 
 let notes = []
+
+isChecked = false
 //render notes
 
 function renderNotes() {
@@ -70,10 +72,16 @@ document.getElementById('day-and-date').textContent = `${currentDay}, ${currentM
 //make function to change the circle in the checkbox
 
 function changeCircle() {
-    const container = document.getElementById('checkbox-container')
-    const circle = document.getElementById('circle')
-    container.addEventListener('click', () => {
-        circle.style.backgroundImage = 'url(icons/circle_checked.svg)'
+    const container = document.getElementById('checkbox-container');
+    const circle = document.getElementById('circle');
+    
+    container.addEventListener('click', (event) => {
+
+        isChecked = !isChecked
+
+        circle.style.background = isChecked
+        ? "url('icons/circle_checked.svg') center/cover"
+        : "url('icons/circle_unchecked.svg') center/cover"
     })
 }
 
