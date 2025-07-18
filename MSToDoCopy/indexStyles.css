@@ -8,6 +8,8 @@
     font-family: "Montserrat", sans-serif;
 
     transition: background-color 0.3s ease, color 0.3s ease;
+
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root{
@@ -15,9 +17,17 @@
     --notes-area-bg-light: white;
     --notes-area-hover-light: rgb(205, 205, 205);
 
+    --note-bg-light: rgb(190,190,190);
+    --note-hover-light: rgb(175, 175, 175);
+
 
     --nav-bar-bg-light: rgb(206, 206, 206);
     --nav-bar-hover-light: rgb(255, 255, 255);
+
+    --add-note-bg-light: rgb(174, 174, 174);
+    --add-note-text-light: rgb(0, 0, 0);
+    --add-note-bg-transition-light: rgb(108, 108, 108);
+    --add-note-text-transition-light: rgb(255, 255, 255);
 }
 
 body{
@@ -204,7 +214,7 @@ body{
 
     border-color: transparent;
 
-    background-color: rgb(174, 174, 174);
+    
     
     
 }
@@ -213,13 +223,13 @@ body{
     background-color: transparent;
 }
 .notes-input:hover, .notes-input:hover input, .notes-input:hover input::placeholder, .notes-input:hover div{
-    background-color: rgb(108, 108, 108);
+    background-color: var(--add-note-bg-transition-light);
     transition: color 0.3s ease;
-    color: rgb(255, 255, 255);
+    color: var(--add-note-text-transition-light);
 }
 
 .plus-icon, .add-new-note{
-    background-color: rgb(174, 174, 174);
+    background-color: var(--add-note-bg-light);
 
     border-color: transparent;
     border-style: solid;
@@ -243,6 +253,6 @@ body{
 }
 
 .add-new-note::placeholder{
-    color: black;
+    color: var(--add-note-text-light);
 }
 

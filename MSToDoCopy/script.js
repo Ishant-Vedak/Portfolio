@@ -7,28 +7,37 @@ isChecked = false
 
 function renderNotes() {
     const container = document.getElementById('main')
+    notes = [1,2,3,4,5]
 
-    container.innerHTML = `
-    <div class="note-card">
-        <header class="note-header">
-            <h2 class="note-title">${note.title}</h2>
-            <button class="delete-note" data-id="${note.id}">Delete</button>
-        </header>
-    </div>
-    `
+    notes.forEach(note => {
+        const newDiv = document.createElement('div')
+        newDiv.textContent = note
+        container.appendChild(newDiv)
+    })
+     
+    /* container.innerHTML = notes.map(note => `
+            <div class="note-card">
+                <label class="checkbox-container" id="checkbox-container" for="checkbox">
+                    <input type="checkbox" class="checkbox" id="checkbox" onclick="changeCircle()">
+                    <img src="icons/circle_unchecked.svg" class="circle" id="circle">
+                </label>
+                <header class="note-header">${note.title}</header>
+                <button class="delete-note">
+                    <img src="icons/delete_button.svg" class="delete_button">
+                </button>
+            </div>
+        `) */
 }
 
 //load notes
-
 function loadNotes() {}
-//save notes
 
+//save notes
 function saveNotes() {
     localStorage.setItem('quicknotes', JSON.stringify(notes))
 }
 
 //add notes
-
 function addNotes() {  
     const input = document.getElementById('add-new-note')
     input.addEventListener("keydown", function (event) {
