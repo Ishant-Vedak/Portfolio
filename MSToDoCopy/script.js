@@ -3,34 +3,36 @@
 let notes = []
 
 isChecked = false
+
 //render notes
 
 function renderNotes() {
     const container = document.getElementById('main')
-    notes = [1,2,3,4,5]
+    container.innerHTML = ''
 
     notes.forEach(note => {
-        const newDiv = document.createElement('div')
-        newDiv.textContent = note
-        container.appendChild(newDiv)
-    })
-     
-    /* container.innerHTML = notes.map(note => `
-            <div class="note-card">
-                <label class="checkbox-container" id="checkbox-container" for="checkbox">
-                    <input type="checkbox" class="checkbox" id="checkbox" onclick="changeCircle()">
-                    <img src="icons/circle_unchecked.svg" class="circle" id="circle">
+        const newNote = document.createElement('div')
+        newNote.className = 'note-card'
+        newNote.innerHTML = `
+                <label class="checkbox-container" id="checkbox-container-${note.id}" for="checkbox-${note.id}">
+                    <input type="checkbox" class="checkbox" id="checkbox-${note.id}" onclick="changeCircle(${note.id})">
+                    <img src="icons/circle_unchecked.svg" class="circle" id="circle-${note.id}">
                 </label>
                 <header class="note-header">${note.title}</header>
-                <button class="delete-note">
-                    <img src="icons/delete_button.svg" class="delete_button">
+                <button type="button" class="delete-note" onclick="deleteNote(${note.id})">
+                    <img src="icons/delete_button.svg" class="delete_button" >
                 </button>
-            </div>
-        `) */
+            
+        `
+        container.appendChild(newNote)
+    })
 }
 
 //load notes
-function loadNotes() {}
+function loadNotes() {
+    const savedNotes = localStorage.getItem('quicknotes')
+    return savedNotes ? JSON.parse(savedNotes) : []
+}
 
 //save notes
 function saveNotes() {
@@ -38,31 +40,42 @@ function saveNotes() {
 }
 
 //add notes
+
 function addNotes() {  
     const input = document.getElementById('add-new-note')
     input.addEventListener("keydown", function (event) {
+        
         if(event.key == "Enter") {
             event.preventDefault()
             const value = input.value.trim()
             if (value) {
                 notes.unshift({
-                    id: generateId(),
-                    title: input
-                })
-            }
+                    title: value,
+                    id: makeId()
+                }) 
+                saveNotes()
+                renderNotes()
+                input.value = ''
+            } 
         }       
     })
-    saveNotes()
-    renderNotes()
+   
 }
+
 
 //add time created for note 
 
-function timeCreated() {
+function makeId() {
     return Date.now().toString()
 }
 
 //remove notes
+
+function deleteNote(noteId) {
+    notes = notes.filter(note => note.id != noteId )
+    saveNotes()
+    renderNotes()
+}
 
 
 //Update Date and time
@@ -80,21 +93,26 @@ document.getElementById('day-and-date').textContent = `${currentDay}, ${currentM
 
 //make function to change the circle in the checkbox
 
-function changeCircle() {
-    const container = document.getElementById('checkbox-container');
-    const circle = document.getElementById('circle');
+function changeCircle(noteId) {
+    const container = document.getElementById(`checkbox-container-${noteId}`);
+    const circle = document.getElementById(`circle-${noteId}`);
     
     container.addEventListener('click', (event) => {
+        event.preventDefault()
 
         isChecked = !isChecked
 
-        circle.style.background = isChecked
-        ? "url('icons/circle_checked.svg') center/cover"
-        : "url('icons/circle_unchecked.svg') center/cover"
+        circle.classList.toggle("checked", isChecked)
+        circle.classList.toggle("unchecked", !isChecked)
     })
 }
 
-setInterval(updateTime, 1000)
-updateTime()
-addNotes()
+document.addEventListener('DOMContentLoaded', function () {
+    setInterval(updateTime, 1000)
+    updateTime()
+
+    notes = loadNotes()
+    renderNotes()
+})
+
 
