@@ -259,3 +259,11 @@ body{
     color: var(--add-note-text-light);
 }
 
+
+.right-sidebar{
+    display: none;
+    background-color: red;
+    width: 20%;
+    transform: translateX(100%);
+}
+

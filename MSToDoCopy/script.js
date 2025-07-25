@@ -16,9 +16,9 @@ function renderNotes() {
         newNote.innerHTML = `
                 <label class="checkbox-container" id="checkbox-container-${note.id}" for="checkbox-${note.id}">
                     <input type="checkbox" class="checkbox" id="checkbox-${note.id}" onclick="changeCircle(${note.id})">
-                    <img src="icons/circle_unchecked.svg" class="circle" id="circle-${note.id}">
+                    <img src="icons/circle_unchecked.svg" class="circle unchecked" id="circle-${note.id}">
                 </label>
-                <header class="note-header">${note.title}</header>
+                <header class="note-header" data-name="note-header">${note.title}</header>
                 <button type="button" class="delete-note" onclick="deleteNote(${note.id})">
                     <img src="icons/delete_button.svg" class="delete_button" >
                 </button>
@@ -105,6 +105,13 @@ function changeCircle(noteId) {
         circle.classList.toggle("checked", isChecked)
         circle.classList.toggle("unchecked", !isChecked)
     })
+}
+
+function showProperties(noteId) {
+    const noteToChange = notes.find(note => note.id == noteId) 
+    if (noteId) {
+        
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
