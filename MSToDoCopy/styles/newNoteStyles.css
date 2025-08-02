@@ -30,7 +30,7 @@
 }
 
 .circle{
-    background: url('icons/circle_unchecked.svg') center/cover ;
+    background: url('../icons/circle_unchecked.svg') center/cover ;
     height: 50%;
     aspect-ratio: 1/1;
 
@@ -38,12 +38,13 @@
 }
 
 .circle.checked{
-    background: url('icons/circle_checked.svg') center/cover;
+    background: url('../icons/circle_checked.svg') center/cover;
 }
 
 .circle.unchecked:hover {
-    background: url('icons/circle_hover.svg') center/cover;
+    background: url('../icons/circle_hover.svg') center/cover;
 }
+
 
 .note-header{
     flex: 1;
