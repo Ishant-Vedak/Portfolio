@@ -41,7 +41,7 @@
     background: url('icons/circle_checked.svg') center/cover;
 }
 
-.circle.unchecked:hover{
+.circle.unchecked:hover {
     background: url('icons/circle_hover.svg') center/cover;
 }
 
