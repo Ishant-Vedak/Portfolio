@@ -114,6 +114,14 @@ function showProperties(noteId) {
     }
 }
 
+function addFavorite() {
+    const star = document.getElementById('add-fav');
+    const favIcon = document.getElementById('fav-icon');
+    star.addEventListener('click', function () {
+        favIcon.classList.toggle('filled')
+    })
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     setInterval(updateTime, 1000)
     updateTime()

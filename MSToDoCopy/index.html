@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/indexStyles.css">
     <link rel="stylesheet" href="styles/newNoteStyles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <title>MS To Do Copy</title>
     <script src="script.js" defer></script>
 </head>
@@ -49,7 +50,32 @@
         </footer>
     </div>
     <aside class="right-sidebar" id="right-sidebar">
-        hi
+        <div class="right-top">
+            <div class="close-right testing right-common">
+                close sidebar
+            </div>
+            <div class="right-filler">  </div>
+            <div class="add-fav testing right-common" onclick="addFavorite()" id="add-fav">
+                <span class="material-symbols-outlined fav-icon" id="fav-icon"> kid_star</span>
+            </div>
+        </div>
+        <div class="right-main">
+            <h1 class="right-heading testing right-common">
+                headingheadingheading
+            </h1>
+            <div class="add-note testing right-common">
+                add file
+            </div>
+            <div class="add-file testing right-common">
+                add details
+            </div>
+        </div>
+        <div class="right-bottom">
+            <div class="date-created testing right-common">
+                date created
+            </div>
+        </div>
+        
     </aside>
 </body>
 </html>
