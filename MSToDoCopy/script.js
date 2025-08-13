@@ -4,6 +4,8 @@ let notes = []
 
 isChecked = false
 
+textArea = document.querySelector('textArea');
+
 //render notes
 
 function renderNotes() {
@@ -107,6 +109,8 @@ function changeCircle(noteId) {
     })
 }
 
+//show right sidebar
+
 function showProperties(noteId) {
     const noteToChange = notes.find(note => note.id == noteId) 
     if (noteId) {
@@ -114,13 +118,24 @@ function showProperties(noteId) {
     }
 }
 
+//checking if a note is favorited
+
 function addFavorite() {
     const star = document.getElementById('add-fav');
     const favIcon = document.getElementById('fav-icon');
-    star.addEventListener('click', function () {
+    favIcon.addEventListener('click', function () {
         favIcon.classList.toggle('filled')
     })
 }
+
+//adjusting the text area height in note.
+
+textArea.addEventListener('input', () => {
+    textArea.style.height = 'auto'
+    textArea.style.height = textArea.scrollHeight + 'px'
+})
+
+//real-time updates
 
 document.addEventListener('DOMContentLoaded', function () {
     setInterval(updateTime, 1000)

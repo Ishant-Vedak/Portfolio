@@ -91,7 +91,7 @@ body{
     padding-right: 5px;
     padding-left: 5px;
 }
-
+/*
 .hamburger-menu{
     aspect-ratio: 1 / 1;
     height: 70%;
@@ -111,6 +111,8 @@ body{
     aspect-ratio: 1 / 1;
     height: 90%;
 }
+
+*/
 
 .search-bar{
     width: 70%;
@@ -240,7 +242,7 @@ body{
     border-style: solid;
     width: var(--notes-area-width);
 
-    overflow-y:scroll;
+    overflow-y: scroll;
 }
 
 .notes-input{
@@ -355,6 +357,37 @@ body{
 .right-heading{
     height: 5rem;
     text-align: center;
+}
+
+.add-file, .add-note{
+    height: fit-content
+}
+
+.note-details{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: 100%;
+    overflow-wrap: break-word;
+
+    background-color: transparent;
+    border-color: transparent;
+    resize: none;
+    overflow: hidden;
+}
+
+.note-details:focus{
+    outline: none;
+}
+
+.note-details::placeholder{
+    color: var(--add-note-text-light);
+}
+
+.note-files{
+    background-color: transparent;
+    border: none;
+
+    height: 90%;
 }
 
 .right-bottom{

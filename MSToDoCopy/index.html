@@ -12,9 +12,9 @@
 <body>
     <div class="navigation-bar">
         <header class="nav-bar-header">
-            <button class="hamburger-menu">
+            <!--<button class="hamburger-menu">
                 <img src="icons/hamburger_menu.svg" alt="Menu" class="hamburger-menu-image">
-            </button>
+            </button>-->
             <section class="search-bar">
                 <input type="text" placeholder="Search"  class="search-bar-input">
             </section>
@@ -57,19 +57,20 @@
             </div>
             <div class="right-filler"></div>
             <div class="add-fav" id="add-fav">
-                <span class="material-symbols-outlined fav-icon" id="fav-icon"> kid_star</span>
+                <span class="material-symbols-outlined fav-icon" id="fav-icon"> star</span>
             </div>
         </div>
         <div class="right-main">
             <h1 class="right-heading right-common">
                 heading
             </h1>
-            <div class="add-note right-common">
-                add file
-            </div>
-            <div class="add-file right-common">
-                add details
-            </div>
+            <section class="add-note right-common">
+                <textarea placeholder="Add details" class="note-details"></textarea>
+            </section>
+            <section class="add-file right-common">
+                <input type="file" id="note-files" class="note-files" multiple hidden>
+                <label for="note-files" class="note-files-label">Add files</label>
+            </section>
         </div>
         <div class="right-bottom">
             <div class="date-created">
