@@ -40,8 +40,7 @@
                 <img src="icons/three_dots_hori.svg" class="three-dots">
             </button>
         </header>
-        <main class="main" id="main">
-        </main> 
+        <main class="main" id="main"></main> 
         <footer class="notes-input">
             <div class="plus-icon">
                 <img src="icons/plus_icon.svg" class="plus-symbol">
@@ -52,7 +51,7 @@
     
     <aside class="right-sidebar" id="right-sidebar">
         <div class="right-top">
-            <div class="close-right">
+            <div class="close-right" id="close-right">
                 <img src="icons/close.svg">
             </div>
             <div class="right-filler"></div>
@@ -68,13 +67,20 @@
                 <textarea placeholder="Add details" class="note-details"></textarea>
             </section>
             <section class="add-file right-common">
-                <input type="file" id="note-files" class="note-files" multiple hidden>
-                <label for="note-files" class="note-files-label">Add files</label>
+                <div class="files-list"></div>
+                <div class="add-file-btn">
+                    <div class="right-plus-box">
+                        <img src="icons/plus_icon.svg" class="right-plus">
+                    </div>
+                    <input type="file" id="note-files" class="note-files" multiple hidden>
+                    <label for="note-files" class="note-files-label">Add files</label>
+                </div>
+                
             </section>
         </div>
         <div class="right-bottom">
             <div class="date-created">
-                Created on: 
+                Created on: <!--Put the note id here-->
             </div>
         </div>
         

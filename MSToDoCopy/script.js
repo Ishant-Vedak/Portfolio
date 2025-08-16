@@ -20,7 +20,7 @@ function renderNotes() {
                     <input type="checkbox" class="checkbox" id="checkbox-${note.id}" onclick="changeCircle(${note.id})">
                     <img src="icons/circle_unchecked.svg" class="circle unchecked" id="circle-${note.id}">
                 </label>
-                <header class="note-header" data-name="note-header">${note.title}</header>
+                <header class="note-header" data-name="note-header" onclick="showProperties(${note.id})">${note.title}</header>
                 <button type="button" class="delete-note" onclick="deleteNote(${note.id})">
                     <img src="icons/delete_button.svg" class="delete_button" >
                 </button>
@@ -112,9 +112,10 @@ function changeCircle(noteId) {
 //show right sidebar
 
 function showProperties(noteId) {
+    const propsSidebar = document.getElementById('right-sidebar')
     const noteToChange = notes.find(note => note.id == noteId) 
     if (noteId) {
-        
+        //alert("working")
     }
 }
 

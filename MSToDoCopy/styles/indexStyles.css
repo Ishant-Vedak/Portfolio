@@ -245,6 +245,10 @@ body{
     overflow-y: scroll;
 }
 
+.main::-webkit-scrollbar{
+    display: none;
+}
+
 .notes-input{
     width: var(--notes-area-width);
     height: 10%;
@@ -314,6 +318,10 @@ body{
     
 }
 
+.right-sidebar.visible{
+    display: flex;
+}
+
 .right-common{
     width: 90%;
     padding: 5px 10px;
@@ -352,6 +360,12 @@ body{
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+
+    overflow-y: scroll;
+}
+
+.right-main::-webkit-scrollbar{
+    display: none;
 }
 
 .right-heading{
@@ -363,11 +377,18 @@ body{
     height: fit-content
 }
 
+.add-file{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .note-details{
     padding-top: 3px;
     padding-bottom: 3px;
     width: 100%;
     overflow-wrap: break-word;
+    font-size: large;
 
     background-color: transparent;
     border-color: transparent;
@@ -383,11 +404,50 @@ body{
     color: var(--add-note-text-light);
 }
 
+.files-list{
+    height: 30px;
+}
+
+.add-file-btn{
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    height: 40px;
+}
+
+.files-list:hover, .add-file-btn:hover{
+    background-color: var(--add-note-bg-transition-light);
+    transition: color 0.1s ease;
+    color: var(--add-note-text-transition-light);
+}
+
+.right-plus-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+.right-plus{
+    height: 50%;
+    aspect-ratio: 1/1;
+}
+
 .note-files{
     background-color: transparent;
     border: none;
 
     height: 90%;
+}
+
+.note-files-label{
+    font-size:large;
+    flex: 1;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
 }
 
 .right-bottom{
