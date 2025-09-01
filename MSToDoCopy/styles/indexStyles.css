@@ -12,6 +12,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+*::-webkit-scrollbar{
+    display: none;
+}
+
 :root{
     --notes-area-width: 95%;
     --notes-area-bg-light: white;
@@ -71,7 +75,7 @@ body{
 
 .navigation-bar{
     width: 20vw;
-    height: 100vh;
+    height: 100dvh;
     border-right-style: solid;
     border-color: black;
     background-color: var(--nav-bar-bg-light);
@@ -170,7 +174,7 @@ body{
     align-items: center;
 
     width: 80vw;
-    height: 100vh;
+    height: 100dvh;
 
     background-color: var(--notes-area-bg-light);
     
@@ -243,10 +247,6 @@ body{
     width: var(--notes-area-width);
 
     overflow-y: scroll;
-}
-
-.main::-webkit-scrollbar{
-    display: none;
 }
 
 .notes-input{

@@ -20,7 +20,7 @@ function renderNotes() {
                     <input type="checkbox" class="checkbox" id="checkbox-${note.id}" onclick="changeCircle(${note.id})">
                     <img src="icons/circle_unchecked.svg" class="circle unchecked" id="circle-${note.id}">
                 </label>
-                <header class="note-header" data-name="note-header" onclick="showProperties(${note.id})">${note.title}</header>
+                <header class="note-header" data-name="note-header">${note.title}</header>
                 <button type="button" class="delete-note" onclick="deleteNote(${note.id})">
                     <img src="icons/delete_button.svg" class="delete_button" >
                 </button>
@@ -111,12 +111,45 @@ function changeCircle(noteId) {
 
 //show right sidebar
 
-function showProperties(noteId) {
-    const propsSidebar = document.getElementById('right-sidebar')
-    const noteToChange = notes.find(note => note.id == noteId) 
-    if (noteId) {
-        //alert("working")
-    }
+function showProperties() {
+    const propsSidebar = document.getElementById('right-sidebar') 
+    
+
+    propsSidebar.innerHTML = `
+        <div class="right-top">
+            <div class="close-right" id="close-right">
+                <img src="icons/close.svg">
+            </div>
+            <div class="right-filler"></div>
+            <div class="add-fav" id="add-fav">
+                <span class="material-symbols-outlined fav-icon" id="fav-icon"> star</span>
+            </div>
+        </div>
+        <div class="right-main">
+            <h1 class="right-heading right-common">
+                heading
+            </h1>
+            <section class="add-note right-common">
+                <textarea placeholder="Add details" class="note-details" data-desc=""></textarea> 
+            </section>
+            <section class="add-file right-common">
+                <div class="files-list"></div>
+                <div class="add-file-btn">
+                    <div class="right-plus-box">
+                        <img src="icons/plus_icon.svg" class="right-plus">
+                    </div>
+                    <input type="file" id="note-files" class="note-files" multiple hidden>
+                    <label for="note-files" class="note-files-label">Add files</label>
+                </div>
+                
+            </section>
+        </div>
+        <div class="right-bottom">
+            <div class="date-created">
+                Created on: 
+            </div>
+        </div>
+    `
 }
 
 //checking if a note is favorited
@@ -136,6 +169,49 @@ textArea.addEventListener('input', () => {
     textArea.style.height = textArea.scrollHeight + 'px'
 })
 
+const addFileSection = document.getElementById('add-file')
+
+addFileSection.addEventListener('click', () => {
+    addFileSection.style.height = 'auto'
+    addFileSection.style.height = addFileSection.scrollHeight = 'px'
+})
+
+//putting all the files inside
+
+
+function updateFilesList() {
+    const files_list = document.getElementById('files-list')
+    /** @type {HTMLInputElement} */
+    const file_btn = document.getElementById('note-files')
+    const allFiles = []
+
+    if (allFiles.length === 0 ) {
+        console.log('working')
+    }
+
+    file_btn.addEventListener('change', () => {
+        console.log(allFiles.length)
+        for (const file of file_btn.files) {
+         allFiles.unshift({
+            title: file.name
+         })
+        }
+        
+        files_list.innerHTML = ''
+
+    
+        allFiles.forEach(file => {
+            const newFile = document.createElement('div')
+            newFile.textContent = file.title
+            newFile.className = 'files-list-item'
+            files_list.appendChild(newFile)
+        })
+        
+
+        
+    })
+}
+
 //real-time updates
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -144,6 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     notes = loadNotes()
     renderNotes()
+
 })
 
-
+updateFilesList()

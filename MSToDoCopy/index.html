@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="styles/noteProperties.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <title>MS To Do Copy</title>
-    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="navigation-bar">
@@ -50,7 +49,7 @@
         </footer>
     </div>
     
-    <aside class="right-sidebar" id="right-sidebar">
+    <aside class="right-sidebar visible" id="right-sidebar">
         <div class="right-top">
             <div class="close-right" id="close-right">
                 <img src="icons/close.svg">
@@ -65,26 +64,28 @@
                 heading
             </h1>
             <section class="add-note right-common">
-                <textarea placeholder="Add details" class="note-details"></textarea>
+                <textarea placeholder="Add details" class="note-details" data-desc=""></textarea> 
             </section>
-            <section class="add-file right-common">
-                <div class="files-list"></div>
+            <section class="add-file right-common" id="add-file">
+                <div class="files-list" id="files-list"></div>
                 <div class="add-file-btn">
-                    <div class="right-plus-box">
+                    <div class="right-plus-box" onclick="document.getElementById('note-files').click(); updateFilesList();">
                         <img src="icons/plus_icon.svg" class="right-plus">
                     </div>
-                    <input type="file" id="note-files" class="note-files" multiple hidden>
-                    <label for="note-files" class="note-files-label">Add files</label>
+                    <input type="file" id="note-files" class="note-files" multiple hidden />
+                    <label for="note-files" class="note-files-label" onchange="updateFilesList()">Add files</label>
                 </div>
                 
             </section>
         </div>
         <div class="right-bottom">
             <div class="date-created">
-                Created on: <!--Put the note id here-->
+                Created on: 
             </div>
         </div>
+
         
     </aside>
+    <script src="script.js"></script>
 </body>
 </html>
