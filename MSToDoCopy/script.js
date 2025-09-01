@@ -2,7 +2,7 @@
 
 let notes = []
 
-const allFiles = []
+let allFiles = []
 
 isChecked = false
 
@@ -178,49 +178,78 @@ addFileSection.addEventListener('click', () => {
     addFileSection.style.height = addFileSection.scrollHeight = 'px'
 })
 
-//putting all the files inside
+//All files logic
 
 
-function updateFilesList() {
+//save files 
+
+function saveFiles(files) {
+    localStorage.setItem('files-of-the-note', JSON.stringify(files))
+}
+
+//load files 
+
+function loadFiles() {
+    const savedFiles = localStorage.getItem('files-of-the-note')
+    return savedFiles ? JSON.parse(savedFiles) : []
+}
+
+//render the files
+
+
+function renderFiles (files) {
     const files_list = document.getElementById('files-list')
-    /** @type {HTMLInputElement} */
-    const file_btn = document.getElementById('note-files')
-    files_list.style.display = 'none'
+    files_list.innerHTML = ''
     
-    file_btn.addEventListener('change', () => {
-        
+    if (files.length === 0) {
+        files_list.style.display = 'none'
+    } else {
+        files_list.style.display = 'grid'
+    }
 
-        for (const file of file_btn.files) {
-        allFiles.unshift({ title: file.name })
-        }
-        
-        files_list.innerHTML = ''
-
-    
-        allFiles.forEach(file => {
+    files.forEach(file => {
             const newFile = document.createElement('div')
             newFile.textContent = file.title
             newFile.className = 'files-list-item'
             files_list.appendChild(newFile)
         })
+}
+
+
+
+//make the list save later
+
+function updateFilesList() {
+    /** @type {HTMLInputElement} */
+    const file_btn = document.getElementById('note-files')
+    let allFiles = loadFiles()
+
+    renderFiles(allFiles)
+    
+    file_btn.addEventListener('change', () => {
+    
+        for (const file of file_btn.files) {
+        allFiles.unshift({ title: file.name })
+        }
         
         console.log(`New length: ${allFiles.length}`)
-        if (allFiles.length !== 0) {
-            files_list.style.display = 'grid'
-        }
+        saveFiles(allFiles)
+        renderFiles(allFiles)
+        
         
     })
 }
+
 
 //real-time updates
 
 document.addEventListener('DOMContentLoaded', function () {
     setInterval(updateTime, 1000)
     updateTime()
-
+    
     notes = loadNotes()
     renderNotes()
-
+    updateFilesList()
 })
 
-updateFilesList()
+
