@@ -2,6 +2,8 @@
 
 let notes = []
 
+const allFiles = []
+
 isChecked = false
 
 textArea = document.querySelector('textArea');
@@ -183,18 +185,10 @@ function updateFilesList() {
     const files_list = document.getElementById('files-list')
     /** @type {HTMLInputElement} */
     const file_btn = document.getElementById('note-files')
-    const allFiles = []
-
-    if (allFiles.length === 0 ) {
-        console.log('working')
-    }
 
     file_btn.addEventListener('change', () => {
-        console.log(allFiles.length)
         for (const file of file_btn.files) {
-         allFiles.unshift({
-            title: file.name
-         })
+        allFiles.unshift({ title: file.name })
         }
         
         files_list.innerHTML = ''
@@ -207,7 +201,7 @@ function updateFilesList() {
             files_list.appendChild(newFile)
         })
         
-
+        console.log(`New length: ${allFiles.length}`)
         
     })
 }
