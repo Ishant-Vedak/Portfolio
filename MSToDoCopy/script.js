@@ -185,8 +185,11 @@ function updateFilesList() {
     const files_list = document.getElementById('files-list')
     /** @type {HTMLInputElement} */
     const file_btn = document.getElementById('note-files')
-
+    files_list.style.display = 'none'
+    
     file_btn.addEventListener('change', () => {
+        
+
         for (const file of file_btn.files) {
         allFiles.unshift({ title: file.name })
         }
@@ -202,6 +205,9 @@ function updateFilesList() {
         })
         
         console.log(`New length: ${allFiles.length}`)
+        if (allFiles.length !== 0) {
+            files_list.style.display = 'grid'
+        }
         
     })
 }
