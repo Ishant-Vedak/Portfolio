@@ -14,7 +14,7 @@ function renderNotes() {
     const container = document.getElementById('main')
     container.innerHTML = ''
 
-    notes.forEach(note => {
+    notes.forEach((note, index) => {
         const newNote = document.createElement('div')
         newNote.className = 'note-card'
         newNote.innerHTML = `
@@ -28,7 +28,9 @@ function renderNotes() {
                 </button>
             
         `
+        newNote.addEventListener('click', () => openSidebar(index))
         container.appendChild(newNote)
+        
     })
 }
 
@@ -113,45 +115,12 @@ function changeCircle(noteId) {
 
 //show right sidebar
 
-function showProperties() {
+function openSidebar(i) {
     const propsSidebar = document.getElementById('right-sidebar') 
-    
-
-    propsSidebar.innerHTML = `
-        <div class="right-top">
-            <div class="close-right" id="close-right">
-                <img src="icons/close.svg">
-            </div>
-            <div class="right-filler"></div>
-            <div class="add-fav" id="add-fav">
-                <span class="material-symbols-outlined fav-icon" id="fav-icon"> star</span>
-            </div>
-        </div>
-        <div class="right-main">
-            <h1 class="right-heading right-common">
-                heading
-            </h1>
-            <section class="add-note right-common">
-                <textarea placeholder="Add details" class="note-details" data-desc=""></textarea> 
-            </section>
-            <section class="add-file right-common">
-                <div class="files-list"></div>
-                <div class="add-file-btn">
-                    <div class="right-plus-box">
-                        <img src="icons/plus_icon.svg" class="right-plus">
-                    </div>
-                    <input type="file" id="note-files" class="note-files" multiple hidden>
-                    <label for="note-files" class="note-files-label">Add files</label>
-                </div>
-                
-            </section>
-        </div>
-        <div class="right-bottom">
-            <div class="date-created">
-                Created on: 
-            </div>
-        </div>
-    `
+    let sidebarTitle = document.getElementById('right-heading')
+    let note = notes[i]
+    sidebarTitle.textContent = note.title
+    propsSidebar.classList.toggle('visible')
 }
 
 //checking if a note is favorited
@@ -198,7 +167,7 @@ function loadFiles() {
 
 
 function renderFiles (files) {
-    const files_list = document.getElementById('files-list')
+    const files_list = document.getElementById(`files-list`)
     files_list.innerHTML = ''
     
     if (files.length === 0) {
@@ -221,7 +190,7 @@ function renderFiles (files) {
 
 function updateFilesList() {
     /** @type {HTMLInputElement} */
-    const file_btn = document.getElementById('note-files')
+    const file_btn = document.getElementById(`note-files`)
     let allFiles = loadFiles()
 
     renderFiles(allFiles)
@@ -251,5 +220,3 @@ document.addEventListener('DOMContentLoaded', function () {
     renderNotes()
     updateFilesList()
 })
-
-

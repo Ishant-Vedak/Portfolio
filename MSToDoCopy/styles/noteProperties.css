@@ -17,6 +17,7 @@
 
 .right-sidebar.visible{
     display: flex;
+    transform: translateX(0);
 }
 
 .right-common{
