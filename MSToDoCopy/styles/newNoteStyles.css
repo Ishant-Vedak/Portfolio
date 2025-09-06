@@ -68,5 +68,9 @@
     
 }
 
+.delete-note:hover{
+    background-color: red;
+}
+
 
 

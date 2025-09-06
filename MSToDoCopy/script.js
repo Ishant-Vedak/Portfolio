@@ -28,7 +28,10 @@ function renderNotes() {
                 </button>
             
         `
-        newNote.addEventListener('click', () => openSidebar(index))
+        const header = newNote.querySelector('.note-header')
+        header.addEventListener('click', () => {
+            openSidebar(index)
+        })
         container.appendChild(newNote)
         
     })
@@ -121,6 +124,7 @@ function openSidebar(i) {
     let note = notes[i]
     sidebarTitle.textContent = note.title
     propsSidebar.classList.toggle('visible')
+    
 }
 
 //checking if a note is favorited
