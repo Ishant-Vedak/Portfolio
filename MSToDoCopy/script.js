@@ -127,6 +127,13 @@ function openSidebar(i) {
     
 }
 
+// close right sidebar
+
+function closeSidebar() {
+    const propsSidebar = document.getElementById('right-sidebar') 
+    propsSidebar.classList.remove('visible')
+}
+
 //checking if a note is favorited
 
 function addFavorite() {
