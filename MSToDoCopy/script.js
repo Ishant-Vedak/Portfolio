@@ -136,12 +136,12 @@ function closeSidebar() {
 
 //checking if a note is favorited
 
-function addFavorite() {
-    const star = document.getElementById('add-fav');
-    const favIcon = document.getElementById('fav-icon');
-    favIcon.addEventListener('click', function () {
-        favIcon.classList.toggle('filled')
-    })
+function addFavorite(img) {
+    console.log('working')
+    let current = img.src 
+    img.src = img.dataset.alt 
+    img.dataset.alt = current
+    
 }
 
 //adjusting the text area height in note.
