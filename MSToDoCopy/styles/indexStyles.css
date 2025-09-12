@@ -18,6 +18,25 @@
 
 :root{
     --notes-area-width: 95%;
+    --notes-area-bg-light: rgb(0, 0, 0);
+    --notes-area-hover-light: rgb(40, 40, 40);
+
+    --note-bg-light: rgb(85, 85, 85);
+    --note-hover-light: rgb(133, 133, 133);
+
+
+    --nav-bar-bg-light: rgb(152, 152, 152);
+    --nav-bar-hover-light: rgb(255, 255, 255);
+
+    --add-note-bg-light: rgb(174, 174, 174);
+    --add-note-text-light: rgb(0, 0, 0);
+    --add-note-bg-transition-light: rgb(108, 108, 108);
+    --add-note-text-transition-light: rgb(255, 255, 255);
+
+    --right-prop-bg-light: rgb(156, 156, 156);
+}
+
+.dark-mode{
     --notes-area-bg-light: white;
     --notes-area-hover-light: rgb(205, 205, 205);
 
