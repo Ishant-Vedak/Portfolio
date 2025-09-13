@@ -11,6 +11,6 @@ These are the main projects that best show my web development skill:
 
 ## Practice Exercises and Small Projects
 
-In my [practice] (Practice) folder, I have small exercises to understand different topics in various languages, including [HTML and CSS] (Practice/HTML-CSS), [Javascript] (Practice/Javascript), [Python] (Practice/Python) and[Java] (Practice/Java).
+In my [practice] (Practice) folder, I have small exercises to understand different topics in various languages, including HTML, CSS, Javascript, Java and Python.
 
 
