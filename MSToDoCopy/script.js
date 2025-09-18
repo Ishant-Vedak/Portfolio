@@ -220,6 +220,15 @@ function updateFilesList() {
     })
 }
 
+//dark mode 
+
+function toggleDarkMode() {
+    darkMode = document.getElementById('dark-mode-button')
+
+    console.log('testing')
+    
+}
+
 
 //real-time updates
 
