@@ -19,27 +19,27 @@
 :root{
     --notes-area-width: 95%;
     --notes-area-bg-light: rgb(255, 255, 255);
-    --notes-area-hover-light: hsl(0, 0%, 80%);
+    --notes-area-hover-light: oklch(from var(--notes-area-bg-light) calc(l * 0.8)c h);
 
-    --note-bg-light: hsl(0, 0%, 75%);
-    --note-hover-light: hsl(0, 0%, 69%);
+    --note-bg-light: oklch(from var(--notes-area-bg-light) calc(l * 0.8)c h);
+    --note-hover-light: oklch(from var(--notes-area-bg-light) calc(l * 0.7)c h);
 
-    --nav-bar-bg-light: hsl(0, 0%, 81%);
-    --nav-bar-hover-light: hsl(0, 0%, 100%);
+    --nav-bar-bg-light: oklch(from var(--notes-area-bg-light) calc(l * 0.8)c h);
+    --nav-bar-hover-light: oklch(from var(--notes-area-bg-light) calc(l * 0.7)c h);
 
-    --add-note-bg-light: hsl(0, 0%, 68%);
-    --add-note-text-light: hsl(0, 0%, 0%);
-    --add-note-bg-transition-light: hsl(0, 0%, 42%);
-    --add-note-text-transition-light: hsl(0, 0%, 100%);
+    --add-note-bg-light: oklch(from var(--notes-area-bg-light) calc(l * 0.7)c h);
+    --add-note-text-light: oklch(from var(--notes-area-bg-light) calc(l - 100)c h);
+    --add-note-bg-transition-light: oklch(from var(--notes-area-bg-light) calc(l * 0.5)c h);
+    --add-note-text-transition-light: oklch(from var(--notes-area-bg-light) calc(100 - l)c h);
 
-    --right-prop-bg-light: hsl(0, 0%, 61%);
+    --right-prop-bg-light: oklch(from var(--notes-area-bg-light) calc(l * 0.65)c h);
 
 
 }
 
 /* These are all the light mode colors, kept here until I make the dark mode theme set*/
 .dark-mode{
-    --notes-area-bg-light: white;
+    --notes-area-bg-light: rgb(26, 26, 26);
     --notes-area-hover-light: rgb(205, 205, 205);
 
     --note-bg-light: rgb(190,190,190);
@@ -55,22 +55,6 @@
     --add-note-text-transition-light: rgb(255, 255, 255);
 
     --right-prop-bg-light: rgb(156, 156, 156);
-
-    --notes-area-bg-light: hsl(0, 0%, 100%);
-    --notes-area-hover-light: hsl(0, 0%, 80%);
-
-    --note-bg-light: hsl(0, 0%, 75%);
-    --note-hover-light: hsl(0, 0%, 69%);
-
-    --nav-bar-bg-light: hsl(0, 0%, 81%);
-    --nav-bar-hover-light: hsl(0, 0%, 100%);
-
-    --add-note-bg-light: hsl(0, 0%, 68%);
-    --add-note-text-light: hsl(0, 0%, 0%);
-    --add-note-bg-transition-light: hsl(0, 0%, 42%);
-    --add-note-text-transition-light: hsl(0, 0%, 100%);
-
-    --right-prop-bg-light: hsl(0, 0%, 61%);
 }
 
 body{
