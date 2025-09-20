@@ -119,84 +119,20 @@ function changeCircle(noteId) {
 //show right sidebar
 
 function openSidebar(i) {
-    console.log('function works');
-    let note = notes[i];
-    const existingSidebar = document.querySelector('.right-sidebar');
-    if (existingSidebar) {
-        console.log(existingSidebar.classList)
-        if(existingSidebar.classList.contains('visible')) {
-            
-            existingSidebar.classList.remove('visible')
-        }
-        
-    }
+    const propsSidebar = document.getElementById('right-sidebar') 
+    let sidebarTitle = document.getElementById('right-heading')
+    let note = notes[i]
+    sidebarTitle.textContent = note.title
+    propsSidebar.classList.toggle('visible')
     
-    const sidebar_wrapper = document.createElement('div')
-    sidebar_wrapper.className = 'right-sidebar';
-    sidebar_wrapper.innerHTML = `
-        <div class="right-top">
-            <div class="close-right" id="close-right">
-                <img src="icons/close.svg">
-            </div>
-            <div class="right-filler"></div>
-            <div class="add-fav" id="add-fav">
-                <img class="fav-icon" id="fav-icon" src="icons/yellow_star_unchecked.svg" data-alt="icons/yellow_star_checked.png" onclick="addFavorite(this)">
-            </div>
-        </div>
-        <div class="right-main">
-            <h1 class="right-heading right-common" id="right-heading"> ${note.title}</h1>
-            <section class="add-note right-common">
-                <textarea placeholder="Add details" class="note-details" data-desc=""></textarea> 
-            </section>
-            <section class="add-file right-common" id="add-file">
-                <div class="files-list" id="files-list"></div>
-                <div class="add-file-btn">
-                    <div class="right-plus-box">
-                        <img src="icons/plus_icon.svg" class="right-plus">
-                    </div>
-                    <input type="file" id="note-files" class="note-files" multiple hidden />
-                    <label for="note-files" class="note-files-label">Add files</label>
-                </div>
-                
-            </section>
-        </div>
-        <div class="right-bottom">
-            <div class="date-created"> 
-            </div>
-        </div>    
-    
-    `;
-    
-    
-    document.body.appendChild(sidebar_wrapper)
-    sidebar_wrapper.classList.toggle('visible')
-    
-    if (sidebar_wrapper.classList.contains('visible')) {
-        //Close Sidebar
-        sidebar_wrapper.querySelector('.close-right').addEventListener('click', () => {
-        sidebar_wrapper.classList.remove('visible');
-        sidebar_wrapper.addEventListener('transitionend', () => sidebar_wrapper.remove(), {once: true})
-        })
-    
-        
-    }
-
-    // Code for the note description being automatically changing to the text.
-    const note_desc = sidebar_wrapper.querySelector('.note-details')
-    note_desc.addEventListener('input', () => {
-    textArea.style.height = 'auto'
-    textArea.style.height = textArea.scrollHeight + 'px'
-    })
-
-    // Code for the note files list to change height as files are added.
-    const addFileSection = sidebar_wrapper.querySelector('.add-file');
-    addFileSection.addEventListener('click', () => {
-    addFileSection.style.height = 'auto'
-    addFileSection.style.height = addFileSection.scrollHeight = 'px'
-    })
 }
 
+// close right sidebar
 
+function closeSidebar() {
+    const propsSidebar = document.getElementById('right-sidebar') 
+    propsSidebar.classList.remove('visible')
+}
 
 //checking if a note is favorited
 
@@ -207,6 +143,20 @@ function addFavorite(img) {
     img.dataset.alt = current
     
 }
+
+//adjusting the text area height in note.
+
+textArea.addEventListener('input', () => {
+    textArea.style.height = 'auto'
+    textArea.style.height = textArea.scrollHeight + 'px'
+})
+
+const addFileSection = document.getElementById('add-file')
+
+addFileSection.addEventListener('click', () => {
+    addFileSection.style.height = 'auto'
+    addFileSection.style.height = addFileSection.scrollHeight = 'px'
+})
 
 //All files logic
 
@@ -226,7 +176,7 @@ function loadFiles() {
 
 //render the files
 
-/*
+
 function renderFiles (files) {
     const files_list = document.getElementById(`files-list`)
     files_list.innerHTML = ''
@@ -245,15 +195,13 @@ function renderFiles (files) {
         })
 }
 
-*/
-
 
 
 //make the list save later
 
 function updateFilesList() {
     /** @type {HTMLInputElement} */
-    /*const file_btn = document.getElementById(`note-files`)
+    const file_btn = document.getElementById(`note-files`)
     let allFiles = loadFiles()
 
     renderFiles(allFiles)
@@ -269,7 +217,7 @@ function updateFilesList() {
         renderFiles(allFiles)
         
         
-    }) */
+    })
 }
 
 //dark mode 
