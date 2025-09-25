@@ -22,13 +22,13 @@ function renderNotes() {
                     <input type="checkbox" class="checkbox" id="checkbox-${note.id}" onclick="changeCircle(${note.id})">
                     <img src="icons/circle_unchecked.svg" class="circle unchecked" id="circle-${note.id}">
                 </label>
-                <header class="note-header" data-name="note-header">${note.title}</header>
+                <header class="note-header" data-name="note-header" id="note-header-${note.id}">${note.title}</header>
                 <button type="button" class="delete-note" onclick="deleteNote(${note.id})">
                     <img src="icons/delete_button.svg" class="delete_button" >
                 </button>
             
         `
-        const header = newNote.querySelector('.note-header')
+        const header = newNote.querySelector(`.note-header`)
         header.addEventListener('click', () => {
             openSidebar(index)
         })
@@ -60,7 +60,10 @@ function addNotes() {
             if (value) {
                 notes.unshift({
                     title: value,
-                    id: makeId()
+                    id: makeId(),
+                    description: '',
+                    isFav: false,
+                    isComplete: false
                 }) 
                 saveNotes()
                 renderNotes()
@@ -103,9 +106,12 @@ document.getElementById('day-and-date').textContent = `${currentDay}, ${currentM
 //make function to change the circle in the checkbox
 
 function changeCircle(noteId) {
+    const note = notes.find(n => n.id === String(noteId))
+    if (!note) {console.log('no note found')}
     const container = document.getElementById(`checkbox-container-${noteId}`);
     const circle = document.getElementById(`circle-${noteId}`);
-    
+    const header = document.getElementById(`note-header-${noteId}`)
+
     container.addEventListener('click', (event) => {
         event.preventDefault()
 
@@ -113,17 +119,99 @@ function changeCircle(noteId) {
 
         circle.classList.toggle("checked", isChecked)
         circle.classList.toggle("unchecked", !isChecked)
+        if (circle.classList.contains('checked')) {
+            note.isComplete = true
+            header.classList.add('strike')
+        } else {
+            note.isComplete = false
+            header.classList.remove('strike')
+        }
     })
 }
 
 //show right sidebar
 
-function openSidebar(i) {
-    const propsSidebar = document.getElementById('right-sidebar') 
-    let sidebarTitle = document.getElementById('right-heading')
-    let note = notes[i]
+function openSidebar(id) {
+    let note = notes[id]
+    const sidebar = document.getElementById('right-sidebar')
+    sidebar.innerHTML = '' 
+    const header = document.createElement('div')
+    header.className = 'right-top'
+    header.innerHTML = `
+        <div class="right-top">
+            <div class="close-right" id="close-right" onclick="closeSidebar()">
+                <img src="icons/close.svg">
+            </div>
+            <div class="right-filler"></div>
+            <div class="add-fav" id="add-fav">
+                <img class="fav-icon" id="fav-icon" src="icons/yellow_star_unchecked.svg" data-alt="icons/yellow_star_checked.png" onclick="addFavorite(this)">
+            </div>
+        </div>
+    `
+
+    const main = document.createElement('div')
+    main.className = 'right-main'
+    main.innerHTML = `
+        <div class="right-main">
+            <h1 class="right-heading right-common" id="right-heading">${note.title}</h1>
+            <section class="add-note right-common">
+                <textarea class="note-details"> ${note.description} </textarea> 
+            </section>
+            <section class="add-file right-common" id="add-file">
+                <div class="files-list" id="files-list"></div>
+                <div class="add-file-btn">
+                    <div class="right-plus-box">
+                        <img src="icons/plus_icon.svg" class="right-plus">
+                    </div>
+                    <input type="file" id="note-files" class="note-files" multiple hidden />
+                    <label for="note-files" class="note-files-label">Add files</label>
+                </div>
+                
+            </section>
+        </div>
+    `
+
+    const footer = document.createElement('div')
+    footer.className = 'right-bottom'
+    footer.innerHTML = `
+        <div class="right-bottom">
+            <div class="date-created"> Created on: 
+            </div>
+        </div>
+    `
+
+    sidebar.appendChild(header)
+    sidebar.appendChild(main)
+    sidebar.appendChild(footer)
+    sidebar.classList.toggle('visible');
+
+    const textArea = main.querySelector('.note-details');
+    textArea.addEventListener('input', () => {
+        textArea.style.height = 'auto'
+        textArea.style.height = textArea.scrollHeight + 'px'
+        note.description = textArea.value;
+        saveNotes()
+    });
+
+    const addFileSection = main.querySelector('.add-file')
+    addFileSection.addEventListener('click', () => {
+        addFileSection.style.height = 'auto'
+        addFileSection.style.height = addFileSection.scrollHeight = 'px'
+    });
+    /*
+    const sidebarTitle = document.getElementById('right-heading')
+    const sidebarDesc = sidebar.querySelector('.note-details')
+
+    let note = notes[id]
     sidebarTitle.textContent = note.title
-    propsSidebar.classList.toggle('visible')
+    sidebarDesc.value = note.description || '';
+    sidebarDesc.addEventListener('input', () => {
+        note.description = sidebarDesc.value;
+        saveNotes()
+    })
+    sidebar.classList.toggle('visible')
+    console.log(notes)
+    */
     
 }
 
@@ -132,6 +220,7 @@ function openSidebar(i) {
 function closeSidebar() {
     const propsSidebar = document.getElementById('right-sidebar') 
     propsSidebar.classList.remove('visible')
+    saveNotes()
 }
 
 //checking if a note is favorited
@@ -144,19 +233,6 @@ function addFavorite(img) {
     
 }
 
-//adjusting the text area height in note.
-
-textArea.addEventListener('input', () => {
-    textArea.style.height = 'auto'
-    textArea.style.height = textArea.scrollHeight + 'px'
-})
-
-const addFileSection = document.getElementById('add-file')
-
-addFileSection.addEventListener('click', () => {
-    addFileSection.style.height = 'auto'
-    addFileSection.style.height = addFileSection.scrollHeight = 'px'
-})
 
 //All files logic
 
@@ -201,6 +277,7 @@ function renderFiles (files) {
 
 function updateFilesList() {
     /** @type {HTMLInputElement} */
+    /*
     const file_btn = document.getElementById(`note-files`)
     let allFiles = loadFiles()
 
@@ -217,15 +294,13 @@ function updateFilesList() {
         renderFiles(allFiles)
         
         
-    })
+    }) */
 }
 
 //dark mode 
 
 function toggleDarkMode() {
     darkMode = document.getElementById('dark-mode-button')
-
-    console.log('testing')
     
 }
 
@@ -233,10 +308,11 @@ function toggleDarkMode() {
 //real-time updates
 
 document.addEventListener('DOMContentLoaded', function () {
-    setInterval(updateTime, 1000)
-    updateTime()
+    
     
     notes = loadNotes()
     renderNotes()
     updateFilesList()
 })
+
+updateTime()

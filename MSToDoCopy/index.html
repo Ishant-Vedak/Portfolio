@@ -28,10 +28,9 @@
         <header class="notes-header">
             <div class="day-stuff">
                 <h1 class="my-day">
-                My Day
+                    My Day
                 </h1>
                 <h4 class="day-and-date" id="day-and-date">
-                    The day and date
                 </h4>
             </div>
             <div class="filler"></div>
@@ -49,40 +48,7 @@
     </div>
     
     <aside class="right-sidebar" id="right-sidebar">
-        <div class="right-top">
-            <div class="close-right" id="close-right" onclick="closeSidebar()">
-                <img src="icons/close.svg">
-            </div>
-            <div class="right-filler"></div>
-            <div class="add-fav" id="add-fav">
-                <img class="fav-icon" id="fav-icon" src="icons/yellow_star_unchecked.svg" data-alt="icons/yellow_star_checked.png" onclick="addFavorite(this)">
-            </div>
-        </div>
-        <div class="right-main">
-            <h1 class="right-heading right-common" id="right-heading">
-                
-            </h1>
-            <section class="add-note right-common">
-                <textarea placeholder="Add details" class="note-details" data-desc=""></textarea> 
-            </section>
-            <section class="add-file right-common" id="add-file">
-                <div class="files-list" id="files-list"></div>
-                <div class="add-file-btn">
-                    <div class="right-plus-box">
-                        <img src="icons/plus_icon.svg" class="right-plus">
-                    </div>
-                    <input type="file" id="note-files" class="note-files" multiple hidden />
-                    <label for="note-files" class="note-files-label">Add files</label>
-                </div>
-                
-            </section>
-        </div>
-        <div class="right-bottom">
-            <div class="date-created"> 
-            </div>
-        </div>
-
-        
+          
     </aside>
     <script src="script.js" defer></script>
 </body>
