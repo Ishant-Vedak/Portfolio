@@ -198,20 +198,6 @@ function openSidebar(id) {
         addFileSection.style.height = 'auto'
         addFileSection.style.height = addFileSection.scrollHeight = 'px'
     });
-    /*
-    const sidebarTitle = document.getElementById('right-heading')
-    const sidebarDesc = sidebar.querySelector('.note-details')
-
-    let note = notes[id]
-    sidebarTitle.textContent = note.title
-    sidebarDesc.value = note.description || '';
-    sidebarDesc.addEventListener('input', () => {
-        note.description = sidebarDesc.value;
-        saveNotes()
-    })
-    sidebar.classList.toggle('visible')
-    console.log(notes)
-    */
     
 }
 
@@ -300,7 +286,23 @@ function updateFilesList() {
 //dark mode 
 
 function toggleDarkMode() {
-    darkMode = document.getElementById('dark-mode-button')
+    darkMode = document.getElementById('dark-mode-button');
+    
+    if (darkMode.dataset.theme === "light") {
+        console.log('dark mode')
+        document.body.setAttribute('style', `
+            --primary-color: rgb(45, 45, 45);
+            `);
+        
+        darkMode.dataset.theme = "dark"
+    } else {
+        console.log('light mode')
+        document.body.setAttribute('style', `
+            --primary-color: rgba(255, 255, 255, 1);
+            `);
+        darkMode.dataset.theme = "light"
+    } 
+    
     
 }
 

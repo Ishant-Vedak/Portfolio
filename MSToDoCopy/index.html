@@ -18,11 +18,15 @@
                 <input type="text" placeholder="Search"  class="search-bar-input">
             </section>
             <button class="dark-mode-toggle">
-                <img src="icons/moon_image.svg" alt="Enable Dark Mode" class="dark-mode-button" id="dark-mode-button" onclick="toggleDarkMode()">
+                <img src="icons/moon_image.svg" 
+                    alt="Enable Dark Mode" 
+                    class="dark-mode-button" 
+                    id="dark-mode-button"
+                    data-theme="light" 
+                    onclick="toggleDarkMode()">
             </button>
         </header>
-        <div class="nav-bar-list">
-        </div>
+        <div class="nav-bar-list" id="nav-bar-list"></div>
     </div>
     <div class="notes-area">
         <header class="notes-header">

@@ -16,30 +16,10 @@
     display: none;
 }
 
-:root{
-    --notes-area-width: 95%;
-    --notes-area-bg-light: rgb(255, 255, 255);
-    --notes-area-hover-light: oklch(from var(--notes-area-bg-light) calc(l * 0.8)c h);
-
-    --note-bg-light: oklch(from var(--notes-area-bg-light) calc(l * 0.8)c h);
-    --note-hover-light: oklch(from var(--notes-area-bg-light) calc(l * 0.7)c h);
-
-    --nav-bar-bg-light: oklch(from var(--notes-area-bg-light) calc(l * 0.8)c h);
-    --nav-bar-hover-light: oklch(from var(--notes-area-bg-light) calc(l * 0.7)c h);
-
-    --add-note-bg-light: oklch(from var(--notes-area-bg-light) calc(l * 0.7)c h);
-    --add-note-text-light: oklch(from var(--notes-area-bg-light) calc(l - 100)c h);
-    --add-note-bg-transition-light: oklch(from var(--notes-area-bg-light) calc(l * 0.5)c h);
-    --add-note-text-transition-light: oklch(from var(--notes-area-bg-light) calc(100 - l)c h);
-
-    --right-prop-bg-light: oklch(from var(--notes-area-bg-light) calc(l * 0.65)c h);
-
-
-}
-
 /* These are all the light mode colors, kept here until I make the dark mode theme set*/
+/*
 .dark-mode{
-    --notes-area-bg-light: rgb(26, 26, 26);
+    --primary-color: rgb(26, 26, 26);
     --notes-area-hover-light: rgb(205, 205, 205);
 
     --note-bg-light: rgb(190,190,190);
@@ -56,10 +36,27 @@
 
     --right-prop-bg-light: rgb(156, 156, 156);
 }
+*/
 
 body{
     display: flex;
     flex-direction: row;
+
+    --primary-color: rgb(255, 255, 255);
+    --notes-area-hover-light: oklch(from var(--primary-color) calc(l * 0.8)c h);
+
+    --note-bg-light: oklch(from var(--primary-color) calc(l * 0.8)c h);
+    --note-hover-light: oklch(from var(--primary-color) calc(l * 0.7)c h);
+
+    --nav-bar-bg-light: oklch(from var(--primary-color) calc(l * 0.8)c h);
+    --nav-bar-hover-light: oklch(from var(--primary-color) calc(l * 0.7)c h);
+
+    --add-note-bg-light: oklch(from var(--primary-color) calc(l * 0.7)c h);
+    --add-note-text-light: oklch(from var(--primary-color) calc(l - 100)c h);
+    --add-note-bg-transition-light: oklch(from var(--primary-color) calc(l * 0.5)c h);
+    --add-note-text-transition-light: oklch(from var(--primary-color) calc(100 - l)c h);
+
+    --right-prop-bg-light: oklch(from var(--primary-color) calc(l * 0.65)c h);
 }
 
 
@@ -175,13 +172,13 @@ body{
     width: 80vw;
     height: 100dvh;
 
-    background-color: var(--notes-area-bg-light);
+    background-color: var(--primary-color);
     
 }
 
 .notes-header{
     height: fit-content;
-    width: var(--notes-area-width);
+    width: 95%;
 
     border-color: transparent;
     border-style: solid;
@@ -219,7 +216,7 @@ body{
     align-items: center;
 
     border-color: transparent;
-    background-color: var(--notes-area-bg-light);
+    background-color: var(--primary-color);
     border-radius: 5px;
     
 }
@@ -243,13 +240,13 @@ body{
 
     border-color: transparent;
     border-style: solid;
-    width: var(--notes-area-width);
+    width: 95%;
 
     overflow-y: scroll;
 }
 
 .notes-input{
-    width: var(--notes-area-width);
+    width: 95%;
     height: 10%;
     
     display: flex;
