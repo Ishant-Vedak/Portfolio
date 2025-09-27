@@ -1,0 +1,35 @@
+@import url(indexStyles.css);
+
+.nav-bar-list{
+    display: flex;
+    justify-content: right;
+}
+
+li {
+    width: 98%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: solid 1px red;
+    position: relative;
+}
+
+li:hover{
+    background-color: blue;
+}
+
+.list-indicator{
+    position: absolute;
+    width: 5px;
+    height: 50%;
+    background-color: darkblue;
+    border: solid 1px darkblue;
+    border-radius: 30%;
+    left: 0;
+}
+
+.list-title{
+    flex:1;
+    text-align: center;
+}

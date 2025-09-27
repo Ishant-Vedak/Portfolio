@@ -4,6 +4,8 @@ let notes = []
 
 let allFiles = []
 
+let lists = []
+
 isChecked = false
 
 textArea = document.querySelector('textArea');
@@ -63,7 +65,8 @@ function addNotes() {
                     id: makeId(),
                     description: '',
                     isFav: false,
-                    isComplete: false
+                    isComplete: false,
+                    list: "My Day"
                 }) 
                 saveNotes()
                 renderNotes()

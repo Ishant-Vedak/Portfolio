@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles/indexStyles.css">
     <link rel="stylesheet" href="styles/newNoteStyles.css">
     <link rel="stylesheet" href="styles/noteProperties.css">
+    <link rel="stylesheet" href="styles/navListItems.css">
     <title>MS To Do Copy</title>
 </head>
 <body>
@@ -26,7 +27,18 @@
                     onclick="toggleDarkMode()">
             </button>
         </header>
-        <div class="nav-bar-list" id="nav-bar-list"></div>
+        <section class="nav-bar-items" id="nav-bar-items">
+            <ol class="nav-bar-list" id="nav-bar-list">
+                <li>
+                    <p class="list-title"><strong>My Day</strong></p>
+                    <div class="list-indicator"></div>
+                </li>
+
+            </ol>
+            <div class="nav-bar-footer">
+
+            </div>
+        </section>
     </div>
     <div class="notes-area">
         <header class="notes-header">
