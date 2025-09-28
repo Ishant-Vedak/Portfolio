@@ -49,7 +49,7 @@ body{
     --note-hover-light: oklch(from var(--primary-color) calc(l * 0.7)c h);
 
     --nav-bar-bg-light: oklch(from var(--primary-color) calc(l * 0.8)c h);
-    --nav-bar-hover-light: oklch(from var(--primary-color) calc(l * 0.7)c h);
+    --nav-bar-hover-light: oklch(from var(--primary-color) calc(l * 0.6)c h);
 
     --add-note-bg-light: oklch(from var(--primary-color) calc(l * 0.7)c h);
     --add-note-text-light: oklch(from var(--primary-color) calc(l - 100)c h);

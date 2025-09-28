@@ -16,35 +16,22 @@
                 <img src="icons/hamburger_menu.svg" alt="Menu" class="hamburger-menu-image">
             </button>-->
             <section class="search-bar">
-                <input type="text" placeholder="Search"  class="search-bar-input">
+                <input type="text" class="search-bar-input" placeholder="Search">
             </section>
             <button class="dark-mode-toggle">
-                <img src="icons/moon_image.svg" 
-                    alt="Enable Dark Mode" 
-                    class="dark-mode-button" 
-                    id="dark-mode-button"
-                    data-theme="light" 
-                    onclick="toggleDarkMode()">
+                <img src="icons/moon_image.svg" alt="Enable Dark Mode" class="dark-mode-button" id="dark-mode-button"data-theme="light">
             </button>
         </header>
-        <section class="nav-bar-items" id="nav-bar-items">
-            <ol class="nav-bar-list" id="nav-bar-list">
-                <li>
-                    <p class="list-title"><strong>My Day</strong></p>
-                    <div class="list-indicator"></div>
-                </li>
+        <ol class="nav-bar-list" id="nav-bar-list"></ol>
+        <div class="nav-bar-footer">
 
-            </ol>
-            <div class="nav-bar-footer">
-
-            </div>
-        </section>
+        </div>
+        
     </div>
     <div class="notes-area">
         <header class="notes-header">
             <div class="day-stuff">
-                <h1 class="my-day">
-                    My Day
+                <h1 class="my-day" id="list-heading">
                 </h1>
                 <h4 class="day-and-date" id="day-and-date">
                 </h4>
@@ -59,7 +46,7 @@
             <div class="plus-icon">
                 <img src="icons/plus_icon.svg" class="plus-symbol">
             </div>
-            <input type="text" class="add-new-note" id="add-new-note" placeholder="Add a New Note" onclick="addNotes()">
+            <input type="text" class="add-new-note" id="add-new-note" placeholder="Add a New Note">
         </footer>
     </div>
     

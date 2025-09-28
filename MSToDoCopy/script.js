@@ -4,19 +4,57 @@ let notes = []
 
 let allFiles = []
 
-let lists = []
+let lists = ["My Day", "Completed"]
+
+let activeList = "My Day"
 
 isChecked = false
 
 textArea = document.querySelector('textArea');
 
+//event listeners for elements
+
+document.getElementById('dark-mode-button').addEventListener('click', () => {
+    toggleDarkMode()
+})
+
+document.getElementById('add-new-note').addEventListener('click', () => {
+    addNotes()
+})
+
+
+// list stuff
+function renderList(activeList) {
+    const allLists = document.getElementById('nav-bar-list');
+    const list_header = document.getElementById('list-heading');
+    allLists.innerHTML = '';
+    lists.forEach((list) => {
+        const newList = document.createElement('li')
+        newList.className = `${list}`
+        newList.innerHTML = `
+        <strong class="list-title" id="list-title-${list}" onclick="changeActiveList('${list}')">${list}</strong>
+        ${list === activeList ? '<div class="list-indicator"></div>' : ''}`    
+        allLists.appendChild(newList)
+    });
+    
+    list_header.textContent = activeList;
+    renderNotes(activeList)
+}
+
+//change the list
+function changeActiveList(list = "My Day") {
+    activeList = list;
+    renderList(activeList)
+}
+
 //render notes
 
-function renderNotes() {
+function renderNotes(activeList) {
     const container = document.getElementById('main')
     container.innerHTML = ''
 
-    notes.forEach((note, index) => {
+    notes.filter(note=> Array.isArray(note.list) && note.list.includes(activeList)).forEach((note, index) => {
+        note.list.push(activeList)
         const newNote = document.createElement('div')
         newNote.className = 'note-card'
         newNote.innerHTML = `
@@ -66,15 +104,19 @@ function addNotes() {
                     description: '',
                     isFav: false,
                     isComplete: false,
-                    list: "My Day"
+                    list: ["My Day"]
                 }) 
                 saveNotes()
-                renderNotes()
+                renderNotes(activeList)
                 input.value = ''
             } 
         }       
     })
    
+}
+
+function addNoteToList(note, listName) {
+    if (!note.list.includes(listName)) {note.list.push(listName)}
 }
 
 
@@ -89,7 +131,7 @@ function makeId() {
 function deleteNote(noteId) {
     notes = notes.filter(note => note.id != noteId )
     saveNotes()
-    renderNotes()
+    renderNotes(activeList)
 }
 
 
@@ -301,7 +343,7 @@ function toggleDarkMode() {
     } else {
         console.log('light mode')
         document.body.setAttribute('style', `
-            --primary-color: rgba(255, 255, 255, 1);
+            --primary-color: rgb(255, 255, 255);
             `);
         darkMode.dataset.theme = "light"
     } 
@@ -314,10 +356,9 @@ function toggleDarkMode() {
 
 document.addEventListener('DOMContentLoaded', function () {
     
-    
     notes = loadNotes()
-    renderNotes()
     updateFilesList()
+    renderList(activeList)
+    updateTime()
 })
 
-updateTime()
