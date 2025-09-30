@@ -4,7 +4,7 @@ let notes = []
 
 let allFiles = []
 
-let lists = ["My Day", "Completed"]
+let lists = ["My Day", "School", "Completed"]
 
 let activeList = "My Day"
 
@@ -29,10 +29,11 @@ function renderList(activeList) {
     const list_header = document.getElementById('list-heading');
     allLists.innerHTML = '';
     lists.forEach((list) => {
-        const newList = document.createElement('li')
+        const newList = document.createElement('li');
+        newList.onclick = () => changeActiveList(list);
         newList.className = `${list}`
         newList.innerHTML = `
-        <strong class="list-title" id="list-title-${list}" onclick="changeActiveList('${list}')">${list}</strong>
+        <strong class="list-title" id="list-title-${list}">${list}</strong>
         ${list === activeList ? '<div class="list-indicator"></div>' : ''}`    
         allLists.appendChild(newList)
     });
@@ -45,6 +46,7 @@ function renderList(activeList) {
 function changeActiveList(list = "My Day") {
     activeList = list;
     renderList(activeList)
+    closeSidebar()
 }
 
 //render notes
@@ -54,7 +56,6 @@ function renderNotes(activeList) {
     container.innerHTML = ''
 
     notes.filter(note=> Array.isArray(note.list) && note.list.includes(activeList)).forEach((note, index) => {
-        note.list.push(activeList)
         const newNote = document.createElement('div')
         newNote.className = 'note-card'
         newNote.innerHTML = `
@@ -70,7 +71,7 @@ function renderNotes(activeList) {
         `
         const header = newNote.querySelector(`.note-header`)
         header.addEventListener('click', () => {
-            openSidebar(index)
+            openSidebar(note.id)
         })
         container.appendChild(newNote)
         
@@ -79,13 +80,22 @@ function renderNotes(activeList) {
 
 //load notes
 function loadNotes() {
-    const savedNotes = localStorage.getItem('quicknotes')
-    return savedNotes ? JSON.parse(savedNotes) : []
+    const savedNotes = localStorage.getItem('quicknotes');
+    return savedNotes ? JSON.parse(savedNotes) : [];
 }
 
 //save notes
 function saveNotes() {
-    localStorage.setItem('quicknotes', JSON.stringify(notes))
+    localStorage.setItem('quicknotes', JSON.stringify(notes));
+}
+
+function loadLists() {
+    const lists = localStorage.getItem('allLists');
+    return lists ? JSON.parse(lists) : [];
+}
+
+function saveLists() {
+    localStorage.setItem('allLists', JSON.stringify(allLists));
 }
 
 //add notes
@@ -104,7 +114,7 @@ function addNotes() {
                     description: '',
                     isFav: false,
                     isComplete: false,
-                    list: ["My Day"]
+                    list: [activeList]
                 }) 
                 saveNotes()
                 renderNotes(activeList)
@@ -113,10 +123,6 @@ function addNotes() {
         }       
     })
    
-}
-
-function addNoteToList(note, listName) {
-    if (!note.list.includes(listName)) {note.list.push(listName)}
 }
 
 
@@ -158,6 +164,7 @@ function changeCircle(noteId) {
     const header = document.getElementById(`note-header-${noteId}`)
 
     container.addEventListener('click', (event) => {
+        
         event.preventDefault()
 
         isChecked = !isChecked
@@ -165,19 +172,23 @@ function changeCircle(noteId) {
         circle.classList.toggle("checked", isChecked)
         circle.classList.toggle("unchecked", !isChecked)
         if (circle.classList.contains('checked')) {
+            event.preventDefault()
             note.isComplete = true
             header.classList.add('strike')
         } else {
+            event.preventDefault()
             note.isComplete = false
             header.classList.remove('strike')
         }
+            
     })
 }
 
 //show right sidebar
 
 function openSidebar(id) {
-    let note = notes[id]
+    let note = notes.find(n => n.id === String(id))
+    if (!note) return;
     const sidebar = document.getElementById('right-sidebar')
     sidebar.innerHTML = '' 
     const header = document.createElement('div')

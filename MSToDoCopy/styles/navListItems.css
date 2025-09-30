@@ -6,6 +6,8 @@
     justify-content: right;
     align-items:flex-end;
     padding-top: 5px;
+    border: solid 1px red;
+    height: 80dvh;
 }
 
 li {
@@ -35,4 +37,21 @@ li:hover{
 .list-title{
     flex:1;
     text-align: center;
+}
+
+.add-list{
+    width: 100%;
+    height: 9vh;
+    border: solid 2px green;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.plus-nav{
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
