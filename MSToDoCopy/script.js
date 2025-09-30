@@ -1,15 +1,10 @@
 //Settings Variables
-
 let notes = []
-
 let allFiles = []
-
-let lists = ["My Day", "School", "Completed"]
-
+let lists = ["My Day", "All", "Completed"]
+let newLists = []
 let activeList = "My Day"
-
 isChecked = false
-
 textArea = document.querySelector('textArea');
 
 //event listeners for elements
@@ -55,15 +50,19 @@ function renderNotes(activeList) {
     const container = document.getElementById('main')
     container.innerHTML = ''
 
-    notes.filter(note=> Array.isArray(note.list) && note.list.includes(activeList)).forEach((note, index) => {
-        const newNote = document.createElement('div')
+    notes.filter(note=> Array.isArray(note.list) && note.list.includes(activeList)).forEach((note) => {
+        if (Array.isArray(note.list) && !note.list.includes("All") && activeList !== "All") {
+            note.list.push("All");
+        }
+        const newNote = document.createElement('div');
+        const isCompleted = note.list.includes("Completed");
         newNote.className = 'note-card'
         newNote.innerHTML = `
                 <label class="checkbox-container" id="checkbox-container-${note.id}" for="checkbox-${note.id}">
                     <input type="checkbox" class="checkbox" id="checkbox-${note.id}" onclick="changeCircle(${note.id})">
-                    <img src="icons/circle_unchecked.svg" class="circle unchecked" id="circle-${note.id}">
+                    <img src="icons/circle_unchecked.svg" class="circle ${isCompleted ? " checked " : " unchecked "}" id="circle-${note.id}">
                 </label>
-                <header class="note-header" data-name="note-header" id="note-header-${note.id}">${note.title}</header>
+                <header class="note-header${isCompleted ? " strike " : ""}" data-name="note-header" id="note-header-${note.id}">${note.title}</header>
                 <button type="button" class="delete-note" onclick="deleteNote(${note.id})">
                     <img src="icons/delete_button.svg" class="delete_button" >
                 </button>
@@ -163,25 +162,57 @@ function changeCircle(noteId) {
     const circle = document.getElementById(`circle-${noteId}`);
     const header = document.getElementById(`note-header-${noteId}`)
 
-    container.addEventListener('click', (event) => {
-        
-        event.preventDefault()
+    const isNowChecked = !note.isComplete;
 
-        isChecked = !isChecked
-
-        circle.classList.toggle("checked", isChecked)
-        circle.classList.toggle("unchecked", !isChecked)
-        if (circle.classList.contains('checked')) {
-            event.preventDefault()
-            note.isComplete = true
-            header.classList.add('strike')
-        } else {
-            event.preventDefault()
-            note.isComplete = false
-            header.classList.remove('strike')
+    if (isNowChecked) {
+        note.isComplete = true;
+        console.log(`${note.title} is completed`)
+        if (!circle.classList.contains('checked') && circle.classList.contains('unchecked')){
+            circle.classList.add('checked');
+            circle.classList.remove('unchecked');
+            header.classList.add('strike');
         }
-            
-    })
+        note.list = note.list.filter(l => l === "All" || l === "Completed")
+        if (!note.list.includes("Completed")) {
+            note.list.push("Completed");
+        }
+        
+    } else {
+        note.isComplete = false;
+        console.log(`${note.title} is not completed`)
+        if (circle.classList.contains('checked') && !circle.classList.contains('unchecked')){
+            circle.classList.remove('checked');
+            circle.classList.add('unchecked');
+            header.classList.remove('strike');
+        }
+        note.list = note.list.filter(l => l !== "Completed");
+        if (activeList !== "All" && !note.list.includes(activeList)) {
+            note.list.push("Completed");
+        }
+    }
+
+    /*
+    const isNowChecked = !circle.classList.contains('checked');
+
+    circle.classList.toggle("checked", isNowChecked)
+    circle.classList.toggle("unchecked", !isNowChecked)
+
+    if (isNowChecked) {
+        note.isComplete = true;
+        header.classList.add('strike');
+        note.list = note.list.filter(l => l === "All" || l === "Completed");
+        if (!note.list.includes("Completed")) {
+            note.list.push("Completed");
+        }
+    } else {
+        note.isComplete = false;
+        header.classList.remove('strike');
+        note.list = note.list.filter(l => l !== "Completed");
+        if (activeList !== "All" && !note.list.includes(activeList)) {
+            note.list.push("Completed");
+        }
+    }
+    */
 }
 
 //show right sidebar
