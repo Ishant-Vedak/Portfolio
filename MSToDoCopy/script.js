@@ -190,29 +190,6 @@ function changeCircle(noteId) {
             note.list.push("Completed");
         }
     }
-
-    /*
-    const isNowChecked = !circle.classList.contains('checked');
-
-    circle.classList.toggle("checked", isNowChecked)
-    circle.classList.toggle("unchecked", !isNowChecked)
-
-    if (isNowChecked) {
-        note.isComplete = true;
-        header.classList.add('strike');
-        note.list = note.list.filter(l => l === "All" || l === "Completed");
-        if (!note.list.includes("Completed")) {
-            note.list.push("Completed");
-        }
-    } else {
-        note.isComplete = false;
-        header.classList.remove('strike');
-        note.list = note.list.filter(l => l !== "Completed");
-        if (activeList !== "All" && !note.list.includes(activeList)) {
-            note.list.push("Completed");
-        }
-    }
-    */
 }
 
 //show right sidebar
@@ -242,7 +219,7 @@ function openSidebar(id) {
         <div class="right-main">
             <h1 class="right-heading right-common" id="right-heading">${note.title}</h1>
             <section class="add-note right-common">
-                <textarea class="note-details"> ${note.description} </textarea> 
+                <textarea class="note-details" placeholder="Add a note description">${note.description}</textarea> 
             </section>
             <section class="add-file right-common" id="add-file">
                 <div class="files-list" id="files-list"></div>
@@ -379,6 +356,8 @@ function toggleDarkMode() {
         console.log('dark mode')
         document.body.setAttribute('style', `
             --primary-color: rgb(45, 45, 45);
+            --add-note-text: rgb(255, 255, 255);
+            --primary-text: rgb(255, 255, 255);
             `);
         
         darkMode.dataset.theme = "dark"
@@ -386,6 +365,8 @@ function toggleDarkMode() {
         console.log('light mode')
         document.body.setAttribute('style', `
             --primary-color: rgb(255, 255, 255);
+            --add-note-text: rgba(0, 0, 0, 1);
+            --primary-text: rgba(0, 0, 0, 1);
             `);
         darkMode.dataset.theme = "light"
     } 

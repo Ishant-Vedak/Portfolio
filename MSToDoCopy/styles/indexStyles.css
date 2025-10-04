@@ -10,6 +10,7 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 
     -webkit-tap-highlight-color: transparent;
+    color: var(--primary-text)
 }
 
 *::-webkit-scrollbar{
@@ -30,7 +31,7 @@
     --nav-bar-hover-light: rgb(255, 255, 255);
 
     --add-note-bg-light: rgb(174, 174, 174);
-    --add-note-text-light: rgb(0, 0, 0);
+    --add-note-text: rgb(0, 0, 0);
     --add-note-bg-transition-light: rgb(108, 108, 108);
     --add-note-text-transition-light: rgb(255, 255, 255);
 
@@ -43,6 +44,7 @@ body{
     flex-direction: row;
 
     --primary-color: rgb(255, 255, 255);
+    --primary-text: black;
     --notes-area-hover-light: oklch(from var(--primary-color) calc(l * 0.8)c h);
 
     --note-bg-light: oklch(from var(--primary-color) calc(l * 0.8)c h);
@@ -52,7 +54,7 @@ body{
     --nav-bar-hover-light: oklch(from var(--primary-color) calc(l * 0.6)c h);
 
     --add-note-bg-light: oklch(from var(--primary-color) calc(l * 0.7)c h);
-    --add-note-text-light: oklch(from var(--primary-color) calc(l - 100)c h);
+    --add-note-text: oklch(from var(--primary-color) calc(l - 100)c h);
     --add-note-bg-transition-light: oklch(from var(--primary-color) calc(l * 0.5)c h);
     --add-note-text-transition-light: oklch(from var(--primary-color) calc(100 - l)c h);
 
@@ -130,13 +132,12 @@ body{
     border-radius: 10px;
 
     background-color: var(--nav-bar-bg-light);
-    color: black;
 
     padding-left: 10px;
 }
 
 .search-bar-input::placeholder{
-    color: black;
+    color: var(--primary-text);
 }
 
 .dark-mode-toggle{
@@ -187,6 +188,7 @@ body{
     flex-direction: row;
 
     padding-right: 10px;
+    color: var(--primary-text);
 }
 
 .my-day{
@@ -194,6 +196,7 @@ body{
     font-weight: 700;
 
     margin-bottom: 5px;
+    
 }
 
 .day-and-date{
@@ -295,6 +298,6 @@ body{
 }
 
 .add-new-note::placeholder{
-    color: var(--add-note-text-light);
+    color: var(--add-note-text);
 }
 

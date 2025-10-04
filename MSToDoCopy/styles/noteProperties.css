@@ -101,7 +101,7 @@
 }
 
 .note-details::placeholder{
-    color: var(--add-note-text-light);
+    color: var(--primary-text);
 }
 
 .files-list{

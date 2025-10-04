@@ -37,6 +37,7 @@ li:hover{
 .list-title{
     flex:1;
     text-align: center;
+    color: var(--primary-text);
 }
 
 .add-list{
@@ -47,6 +48,7 @@ li:hover{
     display: flex;
     flex-direction: row;
     align-items: center;
+    
 }
 
 .plus-nav{
@@ -64,5 +66,5 @@ li:hover{
 }
 
 .add-new-list::placeholder{
-    color: black;
+    color: var(--primary-text);
 }
