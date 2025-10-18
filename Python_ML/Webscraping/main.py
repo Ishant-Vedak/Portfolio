@@ -32,6 +32,25 @@ WebDriverWait(driver, 30).until(
 scholarship_website = driver.find_element(By.PARTIAL_LINK_TEXT, "ScholarTree")
 scholarship_website.click()
 
+WebDriverWait(driver, 20).until(
+    EC.presence_of_element_located((By.XPATH, "//a"))
+)
+
+scholarship_login = driver.find_element(By.XPATH, "//a[contains(@href,'/login')]")
+scholarship_login.click()
+
+WebDriverWait(driver, 20).until(
+    EC.presence_of_element_located((By.XPATH, "//input"))
+)
+
+email_input = driver.find_element(By.XPATH, "//input[@placeholder='E-mail']")
+email_input.send_keys(USERNAME)
+
+password_input = driver.find_element(By.XPATH, "//input[@placeholder='Password']")
+password_input.send_keys(PASSWORD)
+
+confirm_login = driver.find_element(By.XPATH, "//button[text()='Log in']")
+confirm_login.click()
 
 time.sleep(duration)
 
