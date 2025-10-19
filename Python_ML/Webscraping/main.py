@@ -9,6 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 '''  .\.venv\Scripts\activate  '''
+
+allScholarships = []
 duration = 100
 options = Options()
 options.binary_location = "C:\Program Files\Google\Chrome\Application\chrome.exe"
@@ -52,7 +54,30 @@ password_input.send_keys(PASSWORD)
 confirm_login = driver.find_element(By.XPATH, "//button[text()='Log in']")
 confirm_login.click()
 
-time.sleep(duration)
+driver.implicitly_wait(5)
+favorites = driver.find_element(By.XPATH, "//div[contains(text(), 'Favourite')]")
+favorites.click()
 
+items = driver.find_elements(By.CLASS_NAME, "scholarship-list-item")
+itemsListCount = len(items)
+print(itemsListCount)
+
+for i in range(itemsListCount):
+    items = driver.find_elements(By.CLASS_NAME, "scholarship-list-item")
+    items[i].click()
+    driver.implicitly_wait(10)
+    print(f"Clicked item {i + 1}")
+
+
+    driver.back()
+
+    WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "scholarship-list-item"))
+    )
+
+
+
+
+time.sleep(duration)
 driver.quit()
 
