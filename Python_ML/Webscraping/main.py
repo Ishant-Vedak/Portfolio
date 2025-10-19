@@ -1,4 +1,5 @@
-from creds import USERNAME, PASSWORD
+from creds import USERNAME as un
+from creds import PASSWORD as pw
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -47,10 +48,10 @@ scholarship_login.click()
 Waitfor(20, By.XPATH, "//input")
 
 email_input = driver.find_element(By.XPATH, "//input[@placeholder='E-mail']")
-email_input.send_keys(USERNAME)
+email_input.send_keys(un)
 
 password_input = driver.find_element(By.XPATH, "//input[@placeholder='Password']")
-password_input.send_keys(PASSWORD)
+password_input.send_keys(pw)
 
 confirm_login = driver.find_element(By.XPATH, "//button[text()='Log in']")
 confirm_login.click()
@@ -65,9 +66,10 @@ print(itemsListCount)
 
 for i in range(itemsListCount):
     items = driver.find_elements(By.CLASS_NAME, "scholarship-list-item")
+    heading = items[i].text
     items[i].click()
-    driver.implicitly_wait(10)
-    print(f"Clicked item {i + 1}")
+    Waitfor(3, By.XPATH, "//h1")
+    allScholarships.append(heading)
     driver.back()
     Waitfor(5, By.CLASS_NAME, "scholarship-list-item")
 
@@ -75,3 +77,4 @@ for i in range(itemsListCount):
 time.sleep(duration)
 driver.quit()
 
+print(allScholarships)

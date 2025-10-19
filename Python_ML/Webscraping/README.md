@@ -1,6 +1,6 @@
 # Project Overview:
 
-This is a project I am going to use to find scholarships automatically, and then check what I need to do for applying to these scholarships. After that, it will apply to these scholarships for me once I have completed any required tasks.
+This project will automatically set up a reminder and a notion page for each scholarship that I manually find and favourite from a particular scholarship website, ScholarTree.com. The reminder will be a calendar event on Notion Calendar.
 
 ## Tools Used: 
 
@@ -11,3 +11,10 @@ This is a project I am going to use to find scholarships automatically, and then
 This section documents all the resources I have used to help me understand the tools I use in this project. These include documentation websites and youtube tutorials.
 
 - https://youtu.be/NB8OceGZGjA?si=cVWWaSFG3sCJa7Bg
+- Selenium Documentation: https://www.selenium.dev/documentation/
+
+## Future Considerations: 
+
+- Find scholarships on its own.
+- Apply to scholarships once I finish any tasks.
+- Link it to a to do app (MS To Do or my own to do app)
