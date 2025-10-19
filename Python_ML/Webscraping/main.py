@@ -20,30 +20,31 @@ driver = webdriver.Chrome(service=Service(), options=options)
 website = "https://google.com"
 driver.get(website)
 
+def Waitfor(time_waiting, selector, identifier): 
+    WebDriverWait(driver, time_waiting).until(
+        EC.presence_of_element_located((selector, identifier))
+    )
+
 WebDriverWait(driver, 5).until(
     EC.presence_of_element_located((By.CLASS_NAME, "gLFyf"))
 )
 
+Waitfor(5, By.CLASS_NAME, "gLFyf")
+
 input_element = driver.find_element(By.CLASS_NAME, "gLFyf")
 input_element.send_keys("scholartree.com" + Keys.ENTER)
 
-WebDriverWait(driver, 30).until(
-    EC.presence_of_element_located((By.XPATH, "//h3"))
-)
+Waitfor(30, By.XPATH, "//h3")
 
 scholarship_website = driver.find_element(By.PARTIAL_LINK_TEXT, "ScholarTree")
 scholarship_website.click()
 
-WebDriverWait(driver, 20).until(
-    EC.presence_of_element_located((By.XPATH, "//a"))
-)
+Waitfor(20, By.XPATH, "//a")
 
 scholarship_login = driver.find_element(By.XPATH, "//a[contains(@href,'/login')]")
 scholarship_login.click()
 
-WebDriverWait(driver, 20).until(
-    EC.presence_of_element_located((By.XPATH, "//input"))
-)
+Waitfor(20, By.XPATH, "//input")
 
 email_input = driver.find_element(By.XPATH, "//input[@placeholder='E-mail']")
 email_input.send_keys(USERNAME)
@@ -67,15 +68,8 @@ for i in range(itemsListCount):
     items[i].click()
     driver.implicitly_wait(10)
     print(f"Clicked item {i + 1}")
-
-
     driver.back()
-
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "scholarship-list-item"))
-    )
-
-
+    Waitfor(5, By.CLASS_NAME, "scholarship-list-item")
 
 
 time.sleep(duration)
