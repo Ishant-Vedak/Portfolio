@@ -8,11 +8,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import json
+import pandas as pd
 
 '''  .\.venv\Scripts\activate  '''
 
 allScholarships = []
-duration = 100
+duration = 80
 options = Options()
 options.binary_location = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 
@@ -62,7 +64,6 @@ favorites.click()
 
 items = driver.find_elements(By.CLASS_NAME, "scholarship-list-item")
 itemsListCount = len(items)
-print(itemsListCount)
 
 for i in range(itemsListCount):
     items = driver.find_elements(By.CLASS_NAME, "scholarship-list-item")
@@ -77,4 +78,10 @@ for i in range(itemsListCount):
 time.sleep(duration)
 driver.quit()
 
-print(allScholarships)
+split_scholarships = [scholarship.split('\n') for scholarship in allScholarships]
+
+scholarship_dict = [{"id": idx, "Name": i[0], "Amount": i[1], "Date": i[2], "Requirements": i[3:]} for idx, i in enumerate(split_scholarships)]
+
+df = pd.DataFrame(scholarship_dict)
+
+df.to_json("scholarships.json", orient="records", indent=2, force_ascii=False)

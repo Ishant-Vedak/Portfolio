@@ -11,7 +11,7 @@ This project will automatically set up a reminder and a notion page for each sch
 This section documents all the resources I have used to help me understand the tools I use in this project. These include documentation websites and youtube tutorials.
 
 - https://youtu.be/NB8OceGZGjA?si=cVWWaSFG3sCJa7Bg
-- Selenium Documentation: https://www.selenium.dev/documentation/
+- [Selenium Documentation](https://www.selenium.dev/documentation/)
 
 ## Future Considerations: 
 
