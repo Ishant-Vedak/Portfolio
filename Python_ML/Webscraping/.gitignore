@@ -1,4 +1,4 @@
-creds.py
 __pycache__/
 scholarships.json
 testing.py
+.env

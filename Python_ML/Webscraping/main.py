@@ -1,5 +1,3 @@
-from creds import USERNAME as un
-from creds import PASSWORD as pw
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -7,13 +5,22 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 import time
 import json
 import pandas as pd
+from dotenv import load_dotenv
+import os
 
 '''  .\.venv\Scripts\activate  '''
 
 allScholarships = []
+
+load_dotenv()
+
+schol_username = os.getenv("SCHOLAR_USERNAME")
+schol_pass = os.getenv("SCHOLAR_PASSWORD")
+
 duration = 80
 options = Options()
 options.binary_location = "C:\Program Files\Google\Chrome\Application\chrome.exe"
@@ -23,44 +30,47 @@ driver = webdriver.Chrome(service=Service(), options=options)
 website = "https://google.com"
 driver.get(website)
 
-def Waitfor(time_waiting, selector, identifier): 
+def Waitfor(time_waiting: int, selector: str, identifier: str): 
     WebDriverWait(driver, time_waiting).until(
         EC.presence_of_element_located((selector, identifier))
     )
 
-WebDriverWait(driver, 5).until(
-    EC.presence_of_element_located((By.CLASS_NAME, "gLFyf"))
-)
+def find(selector: str, identifier: str):
+    el = driver.find_element(selector, identifier)
+    return el
+
+def findAndSendKeys(selector: By, identifier: str, keys: str, *keyboard_input: str):
+    var_name = find(selector, identifier)
+    if keyboard_input:
+        var_name.send_keys(keys, *keyboard_input)
+    else:
+        var_name.send_keys(keys)
+    return var_name
+
+def findAndClick(selector: By, identifier: str):
+    var_name = find(selector, identifier)
+    var_name.click()
+    return var_name
+
 
 Waitfor(5, By.CLASS_NAME, "gLFyf")
-
-input_element = driver.find_element(By.CLASS_NAME, "gLFyf")
-input_element.send_keys("scholartree.com" + Keys.ENTER)
-
+findAndSendKeys(By.CLASS_NAME, "gLFyf", "scholartree.com", Keys.ENTER)
 Waitfor(30, By.XPATH, "//h3")
-
-scholarship_website = driver.find_element(By.PARTIAL_LINK_TEXT, "ScholarTree")
-scholarship_website.click()
-
+findAndClick(By.PARTIAL_LINK_TEXT, "ScholarTree")
 Waitfor(20, By.XPATH, "//a")
-
-scholarship_login = driver.find_element(By.XPATH, "//a[contains(@href,'/login')]")
-scholarship_login.click()
-
+findAndClick(By.XPATH, "//a[contains(@href,'/login')]")
 Waitfor(20, By.XPATH, "//input")
-
-email_input = driver.find_element(By.XPATH, "//input[@placeholder='E-mail']")
-email_input.send_keys(un)
-
-password_input = driver.find_element(By.XPATH, "//input[@placeholder='Password']")
-password_input.send_keys(pw)
-
-confirm_login = driver.find_element(By.XPATH, "//button[text()='Log in']")
-confirm_login.click()
-
+findAndSendKeys(By.XPATH, "//input[@placeholder='E-mail']", schol_username)
+findAndSendKeys(By.XPATH, "//input[@placeholder='Password']", schol_pass)
+findAndClick(By.XPATH, "//button[text()='Log in']")
 driver.implicitly_wait(5)
-favorites = driver.find_element(By.XPATH, "//div[contains(text(), 'Favourite')]")
-favorites.click()
+findAndClick(By.XPATH, "//div[contains(text(), 'Favourite')]")
+while True:
+    try:
+        findAndClick(By.XPATH, "//button[contains(text(), 'Load more')]")
+        time.sleep(2)
+    except NoSuchElementException:
+        break
 
 items = driver.find_elements(By.CLASS_NAME, "scholarship-list-item")
 itemsListCount = len(items)
@@ -73,8 +83,7 @@ for i in range(itemsListCount):
     allScholarships.append(heading)
     driver.back()
     Waitfor(5, By.CLASS_NAME, "scholarship-list-item")
-
-
+duration -= duration
 time.sleep(duration)
 driver.quit()
 
@@ -82,6 +91,10 @@ split_scholarships = [scholarship.split('\n') for scholarship in allScholarships
 
 scholarship_dict = [{"id": idx, "Name": i[0], "Amount": i[1], "Date": i[2], "Requirements": i[3:]} for idx, i in enumerate(split_scholarships)]
 
+print(f"There are {len(scholarship_dict)} scholarships favorited")
+
 df = pd.DataFrame(scholarship_dict)
+
+alr = pd.read_json("scholarships.json")
 
 df.to_json("scholarships.json", orient="records", indent=2, force_ascii=False)
