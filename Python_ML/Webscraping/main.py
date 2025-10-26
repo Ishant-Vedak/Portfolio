@@ -9,6 +9,7 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 import json
 import pandas as pd
+from notion_client import Client
 from dotenv import load_dotenv
 import os
 
@@ -17,9 +18,6 @@ import os
 allScholarships = []
 
 load_dotenv()
-
-schol_username = os.getenv("SCHOLAR_USERNAME")
-schol_pass = os.getenv("SCHOLAR_PASSWORD")
 
 duration = 80
 options = Options()
@@ -60,8 +58,8 @@ findAndClick(By.PARTIAL_LINK_TEXT, "ScholarTree")
 Waitfor(20, By.XPATH, "//a")
 findAndClick(By.XPATH, "//a[contains(@href,'/login')]")
 Waitfor(20, By.XPATH, "//input")
-findAndSendKeys(By.XPATH, "//input[@placeholder='E-mail']", schol_username)
-findAndSendKeys(By.XPATH, "//input[@placeholder='Password']", schol_pass)
+findAndSendKeys(By.XPATH, "//input[@placeholder='E-mail']", os.getenv("SCHOLAR_USERNAME"))
+findAndSendKeys(By.XPATH, "//input[@placeholder='Password']", os.getenv("SCHOLAR_PASSWORD"))
 findAndClick(By.XPATH, "//button[text()='Log in']")
 driver.implicitly_wait(5)
 findAndClick(By.XPATH, "//div[contains(text(), 'Favourite')]")
@@ -92,9 +90,54 @@ split_scholarships = [scholarship.split('\n') for scholarship in allScholarships
 scholarship_dict = [{"id": idx, "Name": i[0], "Amount": i[1], "Date": i[2], "Requirements": i[3:]} for idx, i in enumerate(split_scholarships)]
 
 print(f"There are {len(scholarship_dict)} scholarships favorited")
-
 df = pd.DataFrame(scholarship_dict)
 
-alr = pd.read_json("scholarships.json")
 
 df.to_json("scholarships.json", orient="records", indent=2, force_ascii=False)
+
+'''   need to add each scholarship to a db.   '''
+
+notion = Client(auth=os.getenv("WORKING_NOTION_API_KEY"))
+
+for _, scholarship in df.iterrows():
+    open_or_closed = ""
+    if str(scholarship["Date"]).startswith("D"):
+        open_or_closed = "Open"
+    else: 
+        open_or_closed = "Closed"
+    
+    req_str = ""
+    for requirement in scholarship["Requirements"]:
+        req_str += str(requirement) + " "
+        
+    notion.pages.create(
+        parent={"database_id": os.getenv("WORKING_DB_KEY")},
+        properties={
+            "Name": {
+                "title": [{"text": {"content": scholarship["Name"]}}]
+                },
+            "Amount": {
+                "rich_text": [{"text": {"content": str(scholarship["Amount"])}}]
+                },
+            "Date": {
+                "rich_text": [{"text": {"content": str(scholarship["Date"])}}]
+                },
+            "Requirements": {
+                "rich_text": [{"text": {"content": req_str}}]
+                },
+            "Open or Closed?": {
+                "select": {"name": open_or_closed}
+                },
+            "Completed": {
+                "select": {"name": "Not Completed"}
+                },
+        }
+    )
+
+'''   check the db if the scholarship already exists. '''
+
+''' add scholarship titles to google calendar'''
+
+'''  check calendar if the scholarship already exists. '''
+
+'''   maybe be able to change properties'''
